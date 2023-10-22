@@ -1,11 +1,11 @@
 function Footer() {
   return (
     <footer className="bg-gray-800 text-white py-8">
-      <div className="container mx-auto">
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="container px-6 mx-auto">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 place-items-center">
           <div className="md:col-span-2 lg:col-span-1">
             <h2 className="text-2xl font-bold mb-4">Company Name</h2>
-            <p className="md:pr-12">
+            <p className="md:pr-12 ">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>
           </div>
