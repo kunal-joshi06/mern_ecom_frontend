@@ -2,10 +2,12 @@ import { useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../../store/hooks"
 import { getProductDetailsAsync } from "../../store/features/products/productSlice"
-import StarRating from "../../components/StarRating"
+import StarRating from "../../components/ProductDetails/StarRating"
+import BreadCrumb from "../../components/ProductDetails/BreadCrumb"
 
 
 const ProductDetail = () => {
+
     const { pId } = useParams()
     const dispatch = useAppDispatch()
 
@@ -20,6 +22,7 @@ const ProductDetail = () => {
     return (
         <section className="text-gray-700 body-font overflow-hidden bg-white">
             <div className="container px-5 py-24 mx-auto">
+                <BreadCrumb currentPage={currentProduct.name} />
                 <div className="lg:w-4/5 mx-auto flex flex-wrap">
                     {currentProduct.imageUrl ? <img alt="ecommerce" className="lg:w-1/2 w-full object-cover object-center rounded border border-gray-200" src={currentProduct.imageUrl} /> : "No Product Image found"}
                     <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
@@ -60,35 +63,36 @@ const ProductDetail = () => {
                             </button>
                         </div>
 
-                        {currentProduct.reviews ? <div className="rounded-lg shadow-lg p-12 text-xs mt-8 mx-4 sm:mx-0 bg-white">
+                        {currentProduct.reviews ? <div className="rounded-lg shadow-lg p-12 text-xs mt-8 mx-4 sm:mx-0 bg-white ">
                             <div>
                                 <div className="flex flex-col">
                                     <h1 className="text-gray-800 text-xl font-medium mb-2">Reviews</h1>
                                 </div>
-                                {currentProduct.reviews.map((review, index: number) => (
-                                    <div key={index} className="border-gray-200 border-2 p-4 mb-3">
-                                        <div>
-                                            <div className="flex justify-between items-center">
-                                                <span className="font-medium text-base">Name : </span><span>{review.name}</span>
-                                            </div>
+                                <div className="max-h-60 overflow-y-scroll">
+                                    {currentProduct.reviews.map((review, index: number) => (
+                                        <div key={index} className="border-gray-200 border-2 p-4 mt-3">
+                                            <div>
+                                                <div className="flex justify-between items-center">
+                                                    <span className="font-medium text-base">Name : </span><span>{review.name}</span>
+                                                </div>
 
-                                        </div>
-                                        <div>
-                                            <div className="flex justify-between items-center">
-                                                <span className="font-medium text-base">Rating : </span><span>{review.rating}/5</span>
+                                            </div>
+                                            <div>
+                                                <div className="flex justify-between items-center">
+                                                    <span className="font-medium text-base">Rating : </span><span>{review.rating}/5</span>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div className="flex justify-between items-center">
+                                                    <span className="font-medium text-base">Comment :</span>
+                                                </div>
+                                                <div className="mb-4 flex justify-between items-center">
+                                                    <span>{review.comment}</span>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div>
-                                            <div className="flex justify-between items-center">
-                                                <span className="font-medium text-base">Comment :</span>
-                                            </div>
-                                            <div className="mb-4 flex justify-between items-center">
-                                                <span>{review.comment}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))}
-
+                                    ))}
+                                </div>
                             </div>
                         </div> : " "}
 
