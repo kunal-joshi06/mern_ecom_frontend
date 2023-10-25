@@ -8,6 +8,7 @@ import { useAppDispatch } from "./store/hooks"
 import { getAllProductsAsync } from "./store/features/products/productSlice";
 import { Toaster } from 'react-hot-toast';
 import AllProducts from "./pages/productPages/allProducts";
+import ProductDetail from "./pages/productPages/ProductDetail";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -26,12 +27,16 @@ function App() {
       element: <Login />
     },
     {
-      path: "register",
+      path: "/register",
       element: <Register />
     },
     {
-      path: "products",
-      element: <AllProducts />
+      path: "/products",
+      element: <Layout><AllProducts /></Layout>
+    },
+    {
+      path: "products/:pId",
+      element: <Layout><ProductDetail /></Layout>
     }
   ])
 

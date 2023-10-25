@@ -2,7 +2,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 import { useAppSelector } from '../store/hooks'
 
 export default function Pagination() {
-  const {count,page, totalProducts} = useAppSelector((store:any)=> store.products);
+  const { page, totalProducts } = useAppSelector((store) => store.products);
   return (
     <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
       <div className="flex flex-1 justify-between sm:hidden">
@@ -22,7 +22,7 @@ export default function Pagination() {
       <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
         <div>
           <p className="text-sm text-gray-700">
-            Showing <span className="font-medium">{page*count - count}</span> to <span className="font-medium">{count}</span> of{' '}
+            Showing <span className="font-medium">{page * totalProducts - totalProducts}</span> to <span className="font-medium">{totalProducts}</span> of{' '}
             <span className="font-medium">{totalProducts}</span> results
           </p>
         </div>
