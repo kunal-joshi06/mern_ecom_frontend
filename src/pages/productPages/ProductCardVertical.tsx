@@ -1,19 +1,19 @@
-function ProductCard(product:any) {
+ const ProductCardVertical = (product:any)=> {
   return (
     <div className="group relative p-6 rounded shadow-lg">
     <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-white lg:aspect-none group-hover:opacity-75 lg:h-80">
       <img
-        src={product.image}
-        alt={product.title}
+        src={product.imageUrl}
+        alt={product.name}
         className="h-full w-full object-contain object-center lg:h-full lg:w-full"
       />
     </div>
     <div className="mt-4 flex justify-between">
       <div>
         <h3 className="text-sm text-gray-700">
-          <a href={product.category}>
+          <a href={product.name}>
             <span aria-hidden="true" className="absolute inset-0" />
-            {product.category}
+            {product.name}
           </a>
         </h3>
       </div>
@@ -23,4 +23,4 @@ function ProductCard(product:any) {
   )
 }
 
-export default ProductCard
+export default ProductCardVertical

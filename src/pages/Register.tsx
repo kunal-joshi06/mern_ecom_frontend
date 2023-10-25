@@ -4,7 +4,6 @@ import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { registerUserAsync } from "../store/features/user/userSlice";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { Toaster } from 'react-hot-toast';
 
 const Register = () => {
 
@@ -22,7 +21,7 @@ const Register = () => {
 
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const isLoggedIn = useAppSelector((state) => state.user.user.isLoggedIn);
+    const isLoggedIn = useAppSelector((state) => state.auth.user.isLoggedIn);
 
     const onSubmit: SubmitHandler<Inputs> = (data) => dispatch(registerUserAsync(data));
 
@@ -81,7 +80,6 @@ const Register = () => {
                 </div>
             </div>
         </div>
-        <Toaster position="top-center" />
     </>)
 }
 

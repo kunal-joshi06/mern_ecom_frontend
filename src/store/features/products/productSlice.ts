@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getAllProducts} from "./productApi";
-import { ProductType } from "./productType";
+import { ProductResponse } from "./productType";
 
 
 const getAllProductsAsync = createAsyncThunk("store/getAllProducts", async () => {
@@ -14,11 +14,17 @@ const getAllProductsAsync = createAsyncThunk("store/getAllProducts", async () =>
 
 
 export interface productState {
-  productsList: ProductType[];
+  page: number;
+  totalProducts:number;
+  count:number;
+  productsList: ProductResponse[];
   loading: "idle" | "pending" | "succeeded" | "failed";
 }
 
 const initialState: productState = {
+  page: 1,
+  totalProducts: 0,
+  count: 0,
   productsList: [],
   loading: "idle",
 };
@@ -39,7 +45,10 @@ export const productSlice = createSlice({
       .addCase(getAllProductsAsync.fulfilled, (state:productState, action:any) => {
         state.loading = "succeeded";
         console.log(action.payload)
-        state.productsList = action.payload;
+        state.page = action.payload.page
+        state.totalProducts = action.payload.totalProducts
+        state.productsList = action.payload.products;
+        state.count = state.productsList?.length;
       })
       .addCase(getAllProductsAsync.rejected, (state:productState) => {
         state.loading = "failed";
