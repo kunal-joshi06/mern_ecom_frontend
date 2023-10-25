@@ -11,19 +11,19 @@ export type ProductResponse = {
 };
 
 export type ProductType = {
-  _id: string;
-  name: string;
-  price: number;
-  rating: number;
-  imageUrl: string;
-  category: string;
-  description: string;
-  stock: number;
+  _id: string | null;
+  name: string | null;
+  price: number | null;
+  rating: number | null;
+  imageUrl: string | null;
+  category: string | null;
+  description: string | null;
+  stock: number | null;
   reviews: Array<{
-    user: string;
-    name: string;
-    rating: number;
-    comment: string;
-    _id: string;
+    user: string | null;
+    name: string | null;
+    rating: number | null;
+    comment: string | null;
+    _id: string | null;
   }>;
 };

@@ -5,11 +5,11 @@ const ProductCardVertical = (product: ProductType) => {
   return (
     <div className="group relative p-6 rounded shadow-lg">
       <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-white lg:aspect-none group-hover:opacity-75 lg:h-80">
-        <img
+        {product.imageUrl && product.name ? <img
           src={product.imageUrl}
           alt={product.name}
           className="h-full w-full object-contain object-center lg:h-full lg:w-full"
-        />
+        /> : ""}
       </div>
       <div className="mt-4 flex justify-between">
         <div>
