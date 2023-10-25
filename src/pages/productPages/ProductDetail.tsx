@@ -65,8 +65,8 @@ const ProductDetail = () => {
                                 <div className="flex flex-col">
                                     <h1 className="text-gray-800 text-xl font-medium mb-2">Reviews</h1>
                                 </div>
-                                {currentProduct.reviews.map((review) => (
-                                    <div className="border-gray-200 border-2 p-4 mb-3">
+                                {currentProduct.reviews.map((review, index: number) => (
+                                    <div key={index} className="border-gray-200 border-2 p-4 mb-3">
                                         <div>
                                             <div className="flex justify-between items-center">
                                                 <span className="font-medium text-base">Name : </span><span>{review.name}</span>
