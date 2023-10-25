@@ -4,7 +4,6 @@ import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { loginUserAsync } from "../store/features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import  { Toaster } from 'react-hot-toast';
 const Login = () => {
     type Inputs = {
         email: string;
@@ -89,7 +88,6 @@ const Login = () => {
                     </div>
                 </div>
             </div>
-            <Toaster position="top-center"/>
         </>
     );
 };

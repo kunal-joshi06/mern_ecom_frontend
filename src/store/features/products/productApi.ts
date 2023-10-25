@@ -1,10 +1,11 @@
 import axios from "axios";
-const apiUrl = 'https://fakestoreapi.com/products?limit=';
+import { ProductResponse } from "./productType";
+const apiUrl = import.meta.env.VITE_FRONTEND_URL;
 
 
 export const getAllProducts = async () => {
   try {
-    const response = await axios.get(`${apiUrl}`);
+    const response = await axios.get<ProductResponse>(`${apiUrl}/products`);
     return response;
   } catch (error) {
     console.log(error);

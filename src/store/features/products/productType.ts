@@ -1,10 +1,12 @@
-export type ProductType = {
-    id: number;
-    title: string;
+export type ProductResponse = {
+    id: string;
+    name: string;
+    description: string;
     price: string;
     category: string;
-    description: string;
-    image:string;
+    imageUrl:string;
+    rating: number;
+    stock: number;
+    reviews: Array<object>;
 };
 
-  
