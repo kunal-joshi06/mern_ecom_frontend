@@ -45,8 +45,8 @@ export const productSlice = createSlice({
       .addCase(getAllProductsAsync.fulfilled, (state:productState, action:any) => {
         state.loading = "succeeded";
         console.log(action.payload)
-        state.page = action.payload.page
-        state.totalProducts = action.payload.totalProducts
+        state.page = action.payload.page;
+        state.totalProducts = action.payload.totalProducts;
         state.productsList = action.payload.products;
         state.count = state.productsList?.length;
       })
