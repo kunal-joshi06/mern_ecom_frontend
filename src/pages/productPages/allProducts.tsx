@@ -7,7 +7,7 @@ import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon } from '@heroicons/rea
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Pagination from "../pagination";
-import { ProductResponse } from '../../store/features/products/productType';
+import { ProductType } from '../../store/features/products/productType';
 
 const sortOptions = [
   { name: 'A-z', href: '#', current: true },
@@ -35,7 +35,7 @@ function classNames(...classes: string[]) {
 function AllProducts() {
   // const dispatch = useAppDispatch();
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
-  const { productsList } = useAppSelector((store) => store.products);
+  const productsList = useAppSelector((store) => store.products.products);
   return (
     <>
       <Navbar />
@@ -244,7 +244,7 @@ function AllProducts() {
                 <div className="bg-white lg:col-span-3">
                   <div className="container mx-auto max-full">
                     <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
-                      {productsList.map((product: ProductResponse) => (<ProductCardHorizontal key={product.id} {...product} />))}
+                      {productsList.map((product: ProductType, index: number) => (<ProductCardHorizontal key={index} {...product} />))}
                     </div>
                   </div>
                 </div>

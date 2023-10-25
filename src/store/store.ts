@@ -2,14 +2,12 @@ import { configureStore, combineReducers, Reducer } from "@reduxjs/toolkit";
 import authReducer, { authState } from "./features/auth/authSlice";
 import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
-import usersReducer, { userState } from "./features/user/userSlice";
 import productsReducer, {
   productState,
 } from "./features/products/productSlice";
 
 export interface RootState {
   auth: authState;
-  users: userState;
   products: productState;
 }
 
@@ -21,7 +19,6 @@ const persistConfig = {
 
 const rootReducer: Reducer<RootState> = combineReducers({
   auth: authReducer,
-  users: usersReducer,
   products: productsReducer,
 });
 
@@ -32,4 +29,3 @@ export const store = configureStore({
 });
 
 export type AppDispatch = typeof store.dispatch;
-
