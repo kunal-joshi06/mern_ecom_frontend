@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { ProductType } from "../../store/features/products/productType"
 
 const ProductCardVertical = (product: ProductType) => {
@@ -13,10 +14,10 @@ const ProductCardVertical = (product: ProductType) => {
       <div className="mt-4 flex justify-between">
         <div>
           <h3 className="text-sm text-gray-700">
-            <a href={product.name}>
+            <Link to={`products/${product._id}`}>
               <span aria-hidden="true" className="absolute inset-0" />
               {product.name}
-            </a>
+            </Link>
           </h3>
         </div>
         <p className="text-sm font-medium text-gray-900">{'$' + product.price}</p>
