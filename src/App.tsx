@@ -1,13 +1,14 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom"
-import {  useEffect } from "react";
+import { useEffect } from "react";
 import Home from "./pages/Home"
 import Layout from "./components/Layout"
 import Login from "./pages/Login"
 import Register from "./pages/Register"
-import AllProducts from "./pages/productPages/allProducts";
+import AllProducts from "./pages/productPages/AllProducts";
 import { useAppDispatch} from "./store/hooks"
 import { getAllProductsAsync } from "./store/features/products/productSlice";
-import  { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
+import AllProducts from "./pages/productPages/allProducts";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -36,11 +37,11 @@ function App() {
   ])
 
   return (<>
-          <RouterProvider router={router} />
-          <Toaster position="top-center"/>
-          </>
-    
-    )
+    <RouterProvider router={router} />
+    <Toaster position="top-center" />
+  </>
+
+  )
 }
 
 export default App
