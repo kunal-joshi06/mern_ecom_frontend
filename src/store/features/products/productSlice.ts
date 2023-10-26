@@ -4,7 +4,7 @@ import { ProductType } from "./productType";
 
 const getAllProductsAsync = createAsyncThunk(
   "store/getAllProducts",
-  async () => {
+  async (queryParams?: Record<string, string>) => {
     try {
       const response = await getAllProducts(queryParams);
       return response.data;

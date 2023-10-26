@@ -24,15 +24,6 @@ const Navbar = () => {
                                 <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z">
                                 </path>
                             </svg>
-<<<<<<< HEAD
-                            <input type="text" className="block w-full py-1.5 pl-10 pr-4 leading-normal rounded-2xl focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500  bg-white text-white aa-input" placeholder="Search" />
-                        </div>
-                    </div>
-                    <div className="relative flex items-center justify-end w-1/4 p-1 ml-5 mr-4 sm:mr-0 sm:right-auto">
-                        {isLoggedIn ? <div onClick={() => dispatch(logoutUser)} className="relative block">
-                            <img alt="profil" src="https://wallpapers.com/images/hd/cool-profile-picture-87h46gcobjl5e4xu.jpg" className="mx-auto object-cover rounded-full h-10 w-10 " />
-                        </div> : <Link className="text-white font-medium" to="/login">Login</Link>}
-=======
                             <input type="text" className="block w-full py-1.5 pl-10 pr-4 leading-normal rounded-2xl focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 ring-opacity-90 bg-gray-100 dark:bg-gray-800 text-gray-400 aa-input" placeholder="Search" />
                             <div className="absolute right-0 hidden h-auto px-2 py-1 mr-2 text-xs text-gray-400 border border-gray-300 rounded-2xl md:block">
                                 +
@@ -42,7 +33,6 @@ const Navbar = () => {
                     <div className="relative flex items-center justify-end w-1/4 p-1 ml-5 mr-4 sm:mr-0 sm:right-auto">
                         <ShoppingCartIcon className="h-5 w-5 mr-3 cursor-pointer" onClick={() => dispatch(setOpen())} />
                         {isLoggedIn ? <ProfileDropdown /> : <Link to="/login">Login</Link>}
->>>>>>> b70f4549f747979225ce44037e8dace50fadaa93
 
                     </div>
                 </div>

@@ -37,12 +37,7 @@ function AllProducts() {
   const products = useAppSelector((store) => store.products.products);
   return (
     <>
-<<<<<<< HEAD
-      <Navbar />
-      <div className="bg-white h-screen overflow-y-scroll no-scrollbar snap-center scroll-smooth relative">
-=======
       <div className="bg-white">
->>>>>>> b70f4549f747979225ce44037e8dace50fadaa93
         <div>
           {/* Mobile filter dialog */}
           <Transition.Root show={mobileFiltersOpen} as={Fragment}>
