@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
-import { useAppSelector } from "../store/hooks";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
 import ProfileDropdown from "./ProfileDropdown";
+import { ShoppingCartIcon } from "@heroicons/react/20/solid";
+import { setOpen } from "../store/features/cart/cartSlice";
+
 const Navbar = () => {
+    const dispatch = useAppDispatch()
     const isLoggedIn = useAppSelector(state => state.auth.user.isLoggedIn)
 
     return (
@@ -9,7 +13,7 @@ const Navbar = () => {
             <div className="relative z-20 flex flex-col justify-center h-full px-3 mx-auto flex-center">
                 <div className="relative flex items-center w-full pl-1 lg:max-w-68 sm:pr-2 sm:ml-0">
                     <div className="container relative left-0 z-50 flex w-3/4 h-auto">
-                        <div className="relative flex items-center w-full h-full lg:w-64 group">
+                        {/* <div className="relative flex items-center w-full h-full lg:w-64 group">
                             <div className="absolute z-50 flex items-center justify-center w-auto h-10 p-3 pr-2 text-sm text-gray-500 uppercase cursor-pointer sm:hidden">
                                 <svg fill="none" className="relative w-5 h-5" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" stroke="currentColor" viewBox="0 0 24 24">
                                     <path d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z">
@@ -24,9 +28,10 @@ const Navbar = () => {
                             <div className="absolute right-0 hidden h-auto px-2 py-1 mr-2 text-xs text-gray-400 border border-gray-300 rounded-2xl md:block">
                                 +
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                     <div className="relative flex items-center justify-end w-1/4 p-1 ml-5 mr-4 sm:mr-0 sm:right-auto">
+                        <ShoppingCartIcon className="h-5 w-5 mr-3 cursor-pointer" onClick={() => dispatch(setOpen())} />
                         {isLoggedIn ? <ProfileDropdown /> : <Link to="/login">Login</Link>}
 
                     </div>

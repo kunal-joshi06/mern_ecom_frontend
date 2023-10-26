@@ -5,10 +5,12 @@ import { persistReducer } from "redux-persist";
 import productsReducer, {
   productState,
 } from "./features/products/productSlice";
+import cartReducer, { CartState } from "./features/cart/cartSlice";
 
 export interface RootState {
   auth: authState;
   products: productState;
+  cart: CartState;
 }
 
 const persistConfig = {
@@ -20,6 +22,7 @@ const persistConfig = {
 const rootReducer: Reducer<RootState> = combineReducers({
   auth: authReducer,
   products: productsReducer,
+  cart: cartReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

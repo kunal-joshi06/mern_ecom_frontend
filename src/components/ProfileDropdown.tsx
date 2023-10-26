@@ -15,7 +15,7 @@ export default function ProfileDropdown() {
             <div>
                 <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-2 py-1 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
                     <div className="relative flex justify-between items-center">
-                        <span>{userName}</span><img alt="profil" src="https://wallpapers.com/images/hd/cool-profile-picture-87h46gcobjl5e4xu.jpg" className="mx-4 object-cover rounded-full h-10 w-10 " />
+                        <span>{userName}</span><img alt="profil" src="https://wallpapers.com/images/hd/cool-profile-picture-87h46gcobjl5e4xu.jpg" className="hidden md:mx-4 object-cover rounded-full h-10 w-10 " />
                     </div>
                 </Menu.Button>
             </div>
