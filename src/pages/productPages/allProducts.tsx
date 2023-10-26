@@ -4,7 +4,6 @@ import { useAppSelector } from "../../store/hooks"
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon } from '@heroicons/react/20/solid'
-import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Pagination from "../pagination";
 import { ProductType } from '../../store/features/products/productType';
@@ -38,8 +37,12 @@ function AllProducts() {
   const products = useAppSelector((store) => store.products.products);
   return (
     <>
+<<<<<<< HEAD
       <Navbar />
       <div className="bg-white h-screen overflow-y-scroll no-scrollbar snap-center scroll-smooth relative">
+=======
+      <div className="bg-white">
+>>>>>>> b70f4549f747979225ce44037e8dace50fadaa93
         <div>
           {/* Mobile filter dialog */}
           <Transition.Root show={mobileFiltersOpen} as={Fragment}>

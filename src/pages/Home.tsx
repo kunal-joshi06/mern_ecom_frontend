@@ -2,11 +2,10 @@
 import { useAppSelector } from "../store/hooks"
 import ProductCardVertical from "./productPages/ProductCardVertical";
 import HomeSlider from "../components/homeSlider";
-import { useNavigate } from "react-router-dom";
 import { ProductType } from "../store/features/products/productType";
+import { Link } from "react-router-dom";
 
 const Home = () => {
-  const navigate = useNavigate();
   const products = useAppSelector((store) => store.products.products);
   return (
     <main>
@@ -22,9 +21,9 @@ const Home = () => {
         </div>
       </div>
       <div className="flex justify-center items-center w-full pb-10">
-        <button onClick={() => navigate("/products")} className="mt-2 px-4 py-2 bg-slate-100 font-semibold text-slate-700 rounded hover:bg-slate-3 00">
+        <Link to="/products" className="mt-2 px-4 py-2 bg-slate-100 font-semibold text-slate-700 rounded hover:bg-slate-3 00">
           More Products
-        </button>
+        </Link>
       </div>
     </main>
   )

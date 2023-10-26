@@ -1,4 +1,7 @@
-const ProductCardHorizontal = (product:any) => {
+import { Link } from "react-router-dom";
+import { ProductType } from "../../store/features/products/productType";
+
+const ProductCardHorizontal = (product: ProductType) => {
     return (<div>
         <div className="relative flex h-full w-full max-w-[48rem] flex-row rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
             <div className="relative m-0 w-2/5 shrink-0 overflow-hidden rounded-xl rounded-r-none bg-white bg-clip-border text-gray-700">
@@ -16,14 +19,14 @@ const ProductCardHorizontal = (product:any) => {
                     {product.name}
                 </h4>
                 <p className="mb-8 block font-sans text-base font-normal leading-relaxed text-gray-700 antialiased">
-                  {product.description}
+                    {product.description}
                 </p>
-                <a className="inline-block" href="#">
+                <Link className="inline-block" to={product._id}>
                     <button
                         className="flex select-none items-center gap-2 rounded-lg py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-pink-500 transition-all hover:bg-pink-500/10 active:bg-pink-500/30 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                         type="button"
                     >
-                        Learn More
+                        View
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -40,7 +43,7 @@ const ProductCardHorizontal = (product:any) => {
                             ></path>
                         </svg>
                     </button>
-                </a>
+                </Link>
             </div>
         </div>
     </div>)

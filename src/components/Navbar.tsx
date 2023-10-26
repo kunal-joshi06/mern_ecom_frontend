@@ -1,17 +1,21 @@
 import { Link } from "react-router-dom";
-import { logoutUser } from "../store/features/auth/authApi";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
+import ProfileDropdown from "./ProfileDropdown";
+import { ShoppingCartIcon } from "@heroicons/react/20/solid";
+import { setOpen } from "../store/features/cart/cartSlice";
+
 const Navbar = () => {
-    const dispatch = useAppDispatch();
+    const dispatch = useAppDispatch()
     const isLoggedIn = useAppSelector(state => state.auth.user.isLoggedIn)
+
     return (
         <header className="z-40 items-center w-full h-14 shadow-lg bg-gradient-to-r from-cyan-500 to-blue-500">
             <div className="relative z-20 flex flex-col justify-center h-full px-3 mx-auto flex-center">
                 <div className="relative flex items-center w-full pl-1 lg:max-w-68 sm:pr-2 sm:ml-0">
                     <div className="container relative left-0 z-50 flex w-3/4 h-auto">
-                        <div className="relative flex items-center w-full h-full lg:w-64 group">
+                        {/* <div className="relative flex items-center w-full h-full lg:w-64 group">
                             <div className="absolute z-50 flex items-center justify-center w-auto h-10 p-3 pr-2 text-sm text-gray-500 uppercase cursor-pointer sm:hidden">
-                                <svg fill="none" className="relative w-5 h-5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg fill="none" className="relative w-5 h-5" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" stroke="currentColor" viewBox="0 0 24 24">
                                     <path d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z">
                                     </path>
                                 </svg>
@@ -20,6 +24,7 @@ const Navbar = () => {
                                 <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z">
                                 </path>
                             </svg>
+<<<<<<< HEAD
                             <input type="text" className="block w-full py-1.5 pl-10 pr-4 leading-normal rounded-2xl focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500  bg-white text-white aa-input" placeholder="Search" />
                         </div>
                     </div>
@@ -27,6 +32,17 @@ const Navbar = () => {
                         {isLoggedIn ? <div onClick={() => dispatch(logoutUser)} className="relative block">
                             <img alt="profil" src="https://wallpapers.com/images/hd/cool-profile-picture-87h46gcobjl5e4xu.jpg" className="mx-auto object-cover rounded-full h-10 w-10 " />
                         </div> : <Link className="text-white font-medium" to="/login">Login</Link>}
+=======
+                            <input type="text" className="block w-full py-1.5 pl-10 pr-4 leading-normal rounded-2xl focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 ring-opacity-90 bg-gray-100 dark:bg-gray-800 text-gray-400 aa-input" placeholder="Search" />
+                            <div className="absolute right-0 hidden h-auto px-2 py-1 mr-2 text-xs text-gray-400 border border-gray-300 rounded-2xl md:block">
+                                +
+                            </div>
+                        </div> */}
+                    </div>
+                    <div className="relative flex items-center justify-end w-1/4 p-1 ml-5 mr-4 sm:mr-0 sm:right-auto">
+                        <ShoppingCartIcon className="h-5 w-5 mr-3 cursor-pointer" onClick={() => dispatch(setOpen())} />
+                        {isLoggedIn ? <ProfileDropdown /> : <Link to="/login">Login</Link>}
+>>>>>>> b70f4549f747979225ce44037e8dace50fadaa93
 
                     </div>
                 </div>
