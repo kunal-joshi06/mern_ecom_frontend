@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import { logoutUser } from "../store/features/auth/authApi";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { useAppSelector } from "../store/hooks";
+import ProfileDropdown from "./ProfileDropdown";
 const Navbar = () => {
-    const dispatch = useAppDispatch();
     const isLoggedIn = useAppSelector(state => state.auth.user.isLoggedIn)
+
     return (
         <header className="z-40 items-center w-full h-14 bg-white shadow-lg dark:bg-gray-700">
             <div className="relative z-20 flex flex-col justify-center h-full px-3 mx-auto flex-center">
@@ -27,9 +27,7 @@ const Navbar = () => {
                         </div>
                     </div>
                     <div className="relative flex items-center justify-end w-1/4 p-1 ml-5 mr-4 sm:mr-0 sm:right-auto">
-                        {isLoggedIn ? <div onClick={() => dispatch(logoutUser)} className="relative block">
-                            <img alt="profil" src="https://wallpapers.com/images/hd/cool-profile-picture-87h46gcobjl5e4xu.jpg" className="mx-auto object-cover rounded-full h-10 w-10 " />
-                        </div> : <Link to="/login">Login</Link>}
+                        {isLoggedIn ? <ProfileDropdown /> : <Link to="/login">Login</Link>}
 
                     </div>
                 </div>
