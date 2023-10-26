@@ -1,6 +1,6 @@
 function Footer() {
   return (
-    <footer className="bg-gray-800 text-white py-8">
+    <footer className="bg-gradient-to-t from-gray-500 to-white text-gray-700 py-8">
       <div className="container px-6 mx-auto">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 place-items-center">
           <div className="md:col-span-2 lg:col-span-1">

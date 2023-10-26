@@ -9,12 +9,12 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 function HomeSlider() {
-  const slides = ['https://images-eu.ssl-images-amazon.com/images/G/31/img2020/img21/apparelGW/jup23p1/recpcroe/MA2_3000._CB576071902_.jpg',
-                    'https://images-eu.ssl-images-amazon.com/images/G/31/img2020/img21/apparelGW/jup23p1/recpcroe/MA2_3000._CB576071902_.jpg',
-                    'https://images-eu.ssl-images-amazon.com/images/G/31/img2020/img21/apparelGW/jup23p1/recpcroe/MA2_3000._CB576071902_.jpg',
-                    'https://images-eu.ssl-images-amazon.com/images/G/31/img2020/img21/apparelGW/jup23p1/recpcroe/MA2_3000._CB576071902_.jpg']
+  const slides = ['https://static.vecteezy.com/system/resources/previews/004/929/821/non_2x/abstract-wave-fluid-shapes-minimalistic-modern-gradient-background-combined-pastel-light-colors-trendy-template-for-brochure-business-card-landing-page-website-illustration-eps-10-vector.jpg',
+                    'https://static.vecteezy.com/system/resources/previews/004/929/821/non_2x/abstract-wave-fluid-shapes-minimalistic-modern-gradient-background-combined-pastel-light-colors-trendy-template-for-brochure-business-card-landing-page-website-illustration-eps-10-vector.jpg',
+                    'https://static.vecteezy.com/system/resources/previews/004/929/821/non_2x/abstract-wave-fluid-shapes-minimalistic-modern-gradient-background-combined-pastel-light-colors-trendy-template-for-brochure-business-card-landing-page-website-illustration-eps-10-vector.jpg',
+                    'https://static.vecteezy.com/system/resources/previews/004/929/821/non_2x/abstract-wave-fluid-shapes-minimalistic-modern-gradient-background-combined-pastel-light-colors-trendy-template-for-brochure-business-card-landing-page-website-illustration-eps-10-vector.jpg']
   return (
-    <div className="h-full overflow-hidden w-full flex">
+    <div className="h-full overflow-hidden w-full flex ">
       <Swiper
       // install Swiper modules
       modules={[Navigation,Keyboard,Pagination,EffectCreative]}
@@ -44,7 +44,7 @@ function HomeSlider() {
         </SwiperSlide>
       ))}
       </Swiper>
-    </div>
+      </div>
   )
 }
 

@@ -3,10 +3,10 @@ import { getAllProducts, getProductDetails } from "./productApi";
 import { ProductType } from "./productType";
 
 const getAllProductsAsync = createAsyncThunk(
-  "products/getAllProducts",
+  "store/getAllProducts",
   async () => {
     try {
-      const response = await getAllProducts();
+      const response = await getAllProducts(queryParams);
       return response.data;
     } catch (error) {
       console.error("Error Fetching Products", error);

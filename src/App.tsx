@@ -4,7 +4,7 @@ import Home from "./pages/Home"
 import Layout from "./components/Layout"
 import Login from "./pages/Login"
 import Register from "./pages/Register"
-import { useAppDispatch } from "./store/hooks"
+import { useAppDispatch} from "./store/hooks"
 import { getAllProductsAsync } from "./store/features/products/productSlice";
 import { Toaster } from 'react-hot-toast';
 import AllProducts from "./pages/productPages/allProducts";
@@ -13,7 +13,7 @@ import ProductDetail from "./pages/productPages/ProductDetail";
 function App() {
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(getAllProductsAsync())
+    dispatch(getAllProductsAsync({page: "1"}))
   }, [dispatch])
 
 

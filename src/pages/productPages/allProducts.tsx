@@ -34,10 +34,15 @@ function classNames(...classes: string[]) {
 function AllProducts() {
   // const dispatch = useAppDispatch();
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
-  const productsList = useAppSelector((store) => store.products.products);
+  const products = useAppSelector((store) => store.products.products);
   return (
     <>
+<<<<<<< HEAD
+      <Navbar />
+      <div className="bg-white h-screen overflow-y-scroll no-scrollbar snap-center scroll-smooth relative">
+=======
       <div className="bg-white">
+>>>>>>> b70f4549f747979225ce44037e8dace50fadaa93
         <div>
           {/* Mobile filter dialog */}
           <Transition.Root show={mobileFiltersOpen} as={Fragment}>
@@ -239,10 +244,10 @@ function AllProducts() {
                     </Disclosure>
                   ))}
                 </form>
-                <div className="bg-white lg:col-span-3">
+                <div className="bg-white lg:col-span-3 ">
                   <div className="container mx-auto max-full">
                     <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
-                      {productsList.map((product: ProductType, index: number) => (<ProductCardHorizontal key={index} {...product} />))}
+                      {products.map((product: ProductType, index: number) => (<ProductCardHorizontal key={index} {...product} />))}
                     </div>
                   </div>
                 </div>
