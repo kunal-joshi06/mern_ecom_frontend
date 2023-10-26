@@ -4,7 +4,6 @@ import { useAppSelector } from "../../store/hooks"
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon } from '@heroicons/react/20/solid'
-import Footer from "../../components/Footer";
 import Pagination from "../pagination";
 import { ProductType } from '../../store/features/products/productType';
 
@@ -187,7 +186,7 @@ function AllProducts() {
               </div>
             </div>
 
-            <section aria-labelledby="products-heading" className="pb-24 pt-6">
+            <section aria-labelledby="products-heading" className="py-6">
               <h2 id="products-heading" className="sr-only">
                 Products
               </h2>
@@ -258,7 +257,6 @@ function AllProducts() {
         </div>
       </div>
       <Pagination />
-      <Footer />
     </>
   )
 }
