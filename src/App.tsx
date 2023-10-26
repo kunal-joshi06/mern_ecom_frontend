@@ -12,7 +12,7 @@ import AllProducts from "./pages/productPages/allProducts";
 function App() {
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(getAllProductsAsync())
+    dispatch(getAllProductsAsync({page: "1"}))
   }, [dispatch])
 
 
