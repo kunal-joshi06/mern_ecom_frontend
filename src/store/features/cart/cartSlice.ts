@@ -6,6 +6,7 @@ import { toast } from "react-hot-toast";
 export interface CartState {
   openState: boolean;
   cartItems: ProductType[];
+  totalItems: number;
   cartTotal: number;
 }
 
@@ -13,6 +14,7 @@ export interface CartState {
 const initialState: CartState = {
   openState: false,
   cartItems: [],
+  totalItems: 0,
   cartTotal: 0,
 };
 
@@ -39,6 +41,10 @@ export const cartSlice = createSlice({
         state.cartItems.push(newItemWithQuantity);
       }
 
+      state.totalItems = state.cartItems.reduce((total, item) => {
+        return total + (item.quantity || 0);
+      }, 0);
+
       state.cartTotal = state.cartItems.reduce((total, item) => {
         if (item.price && item.quantity) {
           return total + item.price * item.quantity;
@@ -53,6 +59,11 @@ export const cartSlice = createSlice({
       state.cartItems = state.cartItems.filter(
         (item) => item._id !== itemIdToRemove
       );
+
+      state.totalItems = state.cartItems.reduce((total, item) => {
+        return total + (item.quantity || 0);
+      }, 0);
+
       state.cartTotal = state.cartItems.reduce((total, item) => {
         if (item.price) {
           return total + item.price;
@@ -77,6 +88,10 @@ export const cartSlice = createSlice({
           );
         }
 
+        state.totalItems = state.cartItems.reduce((total, item) => {
+          return total + (item.quantity || 0);
+        }, 0);
+
         state.cartTotal = state.cartItems.reduce((total, item) => {
           if (item.price && item.quantity) {
             return total + item.price * item.quantity;
@@ -98,6 +113,10 @@ export const cartSlice = createSlice({
         itemToDecrease.quantity > 1
       ) {
         itemToDecrease.quantity -= 1;
+
+        state.totalItems = state.cartItems.reduce((total, item) => {
+          return total + (item.quantity || 0);
+        }, 0);
 
         state.cartTotal = state.cartItems.reduce((total, item) => {
           if (item.price && item.quantity) {
