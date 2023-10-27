@@ -7,7 +7,7 @@ import { setOpen } from "../store/features/cart/cartSlice";
 const Navbar = () => {
     const dispatch = useAppDispatch()
     const isLoggedIn = useAppSelector(state => state.auth.user.isLoggedIn)
-
+    const totalItems = useAppSelector(state => state.cart.totalItems)
     return (
         <header className="z-40 items-center w-full h-14 shadow-lg bg-gradient-to-r from-cyan-500 to-blue-500">
             <div className="relative z-20 flex flex-col justify-center h-full px-3 mx-auto flex-center">
@@ -31,8 +31,8 @@ const Navbar = () => {
                         </div> */}
                     </div>
                     <div className="relative flex items-center justify-end w-1/4 p-1 ml-5 mr-4 sm:mr-0 sm:right-auto">
-                        <ShoppingCartIcon className="h-5 w-5 mr-3 cursor-pointer text-white" onClick={() => dispatch(setOpen())} />
-                        {isLoggedIn ? <ProfileDropdown /> : <Link className="text-white font-medium" to="/login">Login</Link>}
+                        <ShoppingCartIcon className="h-5 w-5 mr-3 cursor-pointer" onClick={() => dispatch(setOpen())} />
+                        {isLoggedIn ? <ProfileDropdown /> : <Link to="/login">Login</Link>}
 
                     </div>
                 </div>
