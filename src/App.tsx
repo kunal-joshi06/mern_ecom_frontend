@@ -9,7 +9,7 @@ import { getAllProductsAsync } from "./store/features/products/productSlice";
 import { Toaster } from 'react-hot-toast';
 
 import ProductDetail from "./pages/productPages/ProductDetail";
-import AllProducts from "./pages/productPages/allProducts";
+import AllProducts from "./pages/productPages/AllProducts";
 
 function App() {
   const dispatch = useAppDispatch();
