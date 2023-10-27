@@ -6,22 +6,22 @@ const ProductCardHorizontal = (product: ProductType) => {
         <div className="relative flex h-full w-full max-w-[48rem] flex-row rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
             <div className="relative m-0 w-2/5 shrink-0 overflow-hidden rounded-xl rounded-r-none bg-white bg-clip-border text-gray-700">
                 <img
-                    src={product.imageUrl}
+                    src={product?.imageUrl}
                     alt="image"
                     className="h-full w-full object-contain"
                 />
             </div>
-            <div className="p-6">
-                <h6 className="mb-4 block font-sans text-base font-semibold uppercase leading-relaxed tracking-normal text-pink-500 antialiased">
-                    {product.category}
-                </h6>
-                <h4 className="mb-2 block font-sans text-2xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
+            <div className="p-6 h-full flex flex-col justify-between">
+            <div>
+                <h6 className="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
                     {product.name}
-                </h4>
-                <p className="mb-8 block font-sans text-base font-normal leading-relaxed text-gray-700 antialiased">
+                </h6>
+                <p className="mb-8 break-word line-clamp-3 block font-sans text-base font-normal leading-relaxed text-gray-700 antialiased">
                     {product.description}
                 </p>
-                <Link className="inline-block" to={product._id}>
+            </div>
+            <div>
+               <Link className="inline-block" to={product._id}>
                     <button
                         className="flex select-none items-center gap-2 rounded-lg py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-pink-500 transition-all hover:bg-pink-500/10 active:bg-pink-500/30 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                         type="button"
@@ -44,6 +44,7 @@ const ProductCardHorizontal = (product: ProductType) => {
                         </svg>
                     </button>
                 </Link>
+               </div>
             </div>
         </div>
     </div>)

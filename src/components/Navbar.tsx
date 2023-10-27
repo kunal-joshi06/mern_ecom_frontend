@@ -30,9 +30,9 @@ const Navbar = () => {
                             </div>
                         </div> */}
                     </div>
-                    <div className="relative flex items-center justify-end w-1/4 p-1 ml-5 mr-4 sm:mr-0 sm:right-auto">
+                    <div className="relative flex items-center text-white justify-end w-1/4 p-1 ml-5 mr-4 sm:mr-0 sm:right-auto">
                         <ShoppingCartIcon className="h-5 w-5 mr-3 cursor-pointer" onClick={() => dispatch(setOpen())} />
-                        {isLoggedIn ? <ProfileDropdown /> : <Link to="/login">Login</Link>}
+                        {isLoggedIn ? <ProfileDropdown /> : <Link className="font-semibold" to="/login">Login</Link>}
 
                     </div>
                 </div>

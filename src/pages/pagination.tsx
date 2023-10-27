@@ -6,12 +6,12 @@ import { getAllProductsAsync } from '../store/features/products/productSlice';
 export default function Pagination() {
   const dispatch = useAppDispatch();
   const {limit,page, totalProducts} = useAppSelector((store:any)=> store.products);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(page);
 
   useEffect(()=>{
     dispatch(getAllProductsAsync({page: currentPage.toString(),}))
       },[currentPage])
-  const totalPages = Math.ceil(totalProducts/limit);
+  const totalPages =2;
   const handlePrev = ()=>{
     if(currentPage > 1){
       setCurrentPage(currentPage - 1);
@@ -29,7 +29,7 @@ export default function Pagination() {
 
   return (<>
       {
-        totalPages > 1 ? <div className="flex items-center justify-between bg-white px-4 py-3 sm:px-6">
+        totalPages >= -1 ? <div className="flex items-center justify-between bg-white px-4 py-3 sm:px-6">
         {/* next prev links for small screen*/}
         <div className="flex flex-1 justify-between sm:hidden">
           <a
@@ -77,7 +77,7 @@ export default function Pagination() {
                     onClick={()=> setCurrentPage(val)}
                     key={val}
                     aria-current="page"
-                    className={currentPage == val ? "relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" : 
+                    className={currentPage == val ? "relative z-10 inline-flex items-center bg-blue-500 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" : 
                                             "relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
                                           }
                   >

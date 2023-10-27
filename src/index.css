@@ -45,6 +45,10 @@
     transition: all .3s ease-out;
   }
 
+.card-shadow{
+  box-shadow: 0 0 0 2px rgb(209, 209, 209), 8px 8px 0 0 rgba(209,209,209,1);
+}
+
 @media only screen and (max-width: 768px) {
     .swiper-button-prev{
         display: none;

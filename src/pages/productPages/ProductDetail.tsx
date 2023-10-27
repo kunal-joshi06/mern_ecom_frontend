@@ -20,7 +20,7 @@ const ProductDetail = () => {
     const handleAddToCart = (product: ProductType) => {
         isLoggedIn ? dispatch(addItemToCart(product)) : toast.error("Please Login To Add Item")
     }
-
+ 
     useEffect(() => {
         if (pId) {
             dispatch(getProductDetailsAsync(pId))
@@ -30,16 +30,16 @@ const ProductDetail = () => {
     return (
         <section className="text-gray-700 body-font overflow-hidden bg-white">
             <div className="container px-5 py-24 mx-auto">
-                <BreadCrumb currentPage={currentProduct.name} />
+                <BreadCrumb currentPage={currentProduct?.name} />
                 <div className="lg:w-4/5 mx-auto flex flex-wrap">
-                    {currentProduct.imageUrl ? <img alt="ecommerce" className="lg:w-1/2 w-full object-cover object-center rounded border border-gray-200" src={currentProduct.imageUrl} /> : "No Product Image found"}
+                    {currentProduct?.imageUrl ? <img alt="ecommerce" className="lg:w-1/2 w-full object-cover object-center rounded border border-gray-200" src={currentProduct.imageUrl} /> : "No Product Image found"}
                     <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                         <h2 className="text-sm title-font text-gray-500 tracking-widest">Product Id: #{currentProduct._id}</h2>
                         <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">{currentProduct.name}</h1>
                         <div className="flex mb-4">
                             <span className="flex items-center">
-                                {currentProduct.rating && <StarRating rating={currentProduct.rating} />}
-                                <span className="text-gray-600 ml-3">{currentProduct.reviews.length} Reviews</span>
+                                {currentProduct?.rating && <StarRating rating={currentProduct?.rating} />}
+                                <span className="text-gray-600 ml-3">{currentProduct?.reviews.length} Reviews</span>
                             </span>
                             <span className="flex ml-3 pl-3 py-2 border-l-2 border-gray-200">
                                 <a className="text-gray-500">
@@ -76,32 +76,29 @@ const ProductDetail = () => {
                             </button>
                         </div>
 
-                        {currentProduct.reviews && <div className="rounded-lg shadow-lg p-12 text-xs mt-8 mx-4 sm:mx-0 bg-white ">
+                        {currentProduct.reviews && <div className="rounded-lg border-2 border-solid border-gray-200 p-6 text-xs mt-8 mx-4 sm:mx-0 bg-white ">
                             <div>
-                                <div className="flex flex-col">
-                                    <h1 className="text-gray-800 text-xl font-medium mb-2">Reviews</h1>
+                                <div className="flex flex-col px-5">
+                                    <h1 className="text-gray-800 text-xl font-medium mb-2">Customer Rating</h1>
                                 </div>
-                                <div className="max-h-60 overflow-y-scroll">
+                                <div className="max-h-60 overflow-y-scroll no-scrollbar px-6 pb-6">
                                     {currentProduct.reviews.map((review, index: number) => (
-                                        <div key={index} className="border-gray-200 border-2 p-4 mt-3">
+                                        <div key={index} className="border-gray-200 card-shadow p-4 mt-5">
+                                              <div>
+                                                <div className="flex justify-between items-center">
+                                                 <StarRating className="text-sm" rating={review?.rating} />
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div className="my-4 text-sm flex justify-between items-center">
+                                                    <span>{review?.comment}</span>
+                                                </div>
+                                            </div>
                                             <div>
                                                 <div className="flex justify-between items-center">
-                                                    <span className="font-medium text-base">Name : </span><span>{review.name}</span>
+                                                   <span>by: {review?.name}</span>
                                                 </div>
 
-                                            </div>
-                                            <div>
-                                                <div className="flex justify-between items-center">
-                                                    <span className="font-medium text-base">Rating : </span><span>{review.rating}/5</span>
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <div className="flex justify-between items-center">
-                                                    <span className="font-medium text-base">Comment :</span>
-                                                </div>
-                                                <div className="mb-4 flex justify-between items-center">
-                                                    <span>{review.comment}</span>
-                                                </div>
                                             </div>
                                         </div>
                                     ))}
