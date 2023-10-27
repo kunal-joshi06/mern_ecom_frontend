@@ -6,6 +6,7 @@ import StarRating from "../../components/ProductDetails/StarRating"
 import BreadCrumb from "../../components/ProductDetails/BreadCrumb"
 import { ProductType } from "../../store/features/products/productType"
 import { addItemToCart } from "../../store/features/cart/cartSlice"
+import toast from "react-hot-toast"
 
 
 const ProductDetail = () => {
@@ -13,10 +14,11 @@ const ProductDetail = () => {
     const { pId } = useParams()
     const dispatch = useAppDispatch()
 
+    const isLoggedIn = useAppSelector(state => state.auth.user.isLoggedIn)
     const currentProduct = useAppSelector(state => state.products.currentProduct)
 
     const handleAddToCart = (product: ProductType) => {
-        dispatch(addItemToCart(product))
+        isLoggedIn ? dispatch(addItemToCart(product)) : toast.error("Please Login To Add Item")
     }
 
     useEffect(() => {
