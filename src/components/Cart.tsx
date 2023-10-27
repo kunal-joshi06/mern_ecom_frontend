@@ -2,7 +2,7 @@ import { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
-import { removeItemFromCart, setClose } from '../store/features/cart/cartSlice'
+import { decreaseQuantity, increaseQuantity, removeItemFromCart, setClose } from '../store/features/cart/cartSlice'
 import { Link } from 'react-router-dom'
 
 
@@ -22,6 +22,14 @@ export default function Cart() {
     const products = useAppSelector(state => state.cart.cartItems)
 
     const cartTotal = useAppSelector(state => state.cart.cartTotal)
+
+    const handleIncreaseQty = (id: string) => {
+        dispatch(increaseQuantity(id))
+    }
+
+    const handleDecreaseQty = (id: string) => {
+        dispatch(decreaseQuantity(id))
+    }
 
     return (
         <Transition.Root show={isCartOpen} as={Fragment}>
@@ -93,8 +101,7 @@ export default function Cart() {
                                                                             <p className="mt-1 text-sm text-gray-500">Rating : {Math.round(product.rating!)}</p>
                                                                         </div>
                                                                         <div className="flex flex-1 items-end justify-between text-sm">
-                                                                            <p className="text-gray-500">Qty </p>
-
+                                                                            <p className="text-gray-500"><span className='flex'>Qty : <button className=' mx-1 border-slate-300 border-2 w-4' onClick={() => handleIncreaseQty(product._id!)}>+</button><span className='font-bold'>{product.quantity} </span><button className='mx-1 border-slate-300 border-2 w-4' onClick={() => handleDecreaseQty(product._id!)}>-</button></span></p>
                                                                             <div className="flex">
                                                                                 <button
                                                                                     onClick={() => handleRemoveItem(product._id!)}

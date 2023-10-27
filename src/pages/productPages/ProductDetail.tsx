@@ -19,7 +19,6 @@ const ProductDetail = () => {
         dispatch(addItemToCart(product))
     }
 
-
     useEffect(() => {
         if (pId) {
             dispatch(getProductDetailsAsync(pId))
@@ -58,6 +57,9 @@ const ProductDetail = () => {
                                 </a>
                             </span>
                         </div>
+                        <p className="flex items-center">
+                            <span className="text-gray-600 ">Stock : <span className="font-bold">{currentProduct.stock}</span></span>
+                        </p>
                         <p className="leading-relaxed">{currentProduct.description}</p>
 
                         <div className="flex mt-5">

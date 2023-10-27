@@ -19,7 +19,7 @@ export type ProductType = {
   category: string | null;
   description: string | null;
   stock: number | null;
-  quanitity: number | null;
+  quantity: number | null;
   reviews: Array<{
     user: string | null;
     name: string | null;
