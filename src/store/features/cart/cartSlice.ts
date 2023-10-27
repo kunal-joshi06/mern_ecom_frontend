@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import { ProductType } from "../products/productType";
 import { toast } from "react-hot-toast";
 
-// Define a type for the slice state
 export interface CartState {
   openState: boolean;
   cartItems: ProductType[];
@@ -10,7 +9,6 @@ export interface CartState {
   cartTotal: number;
 }
 
-// Define the initial state using that type
 const initialState: CartState = {
   openState: false,
   cartItems: [],
