@@ -9,8 +9,6 @@ import { ProductType } from '../../store/features/products/productType';
 import { getAllProductsAsync } from '../../store/features/products/productSlice';
 
 
-
-
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
@@ -18,18 +16,35 @@ function classNames(...classes: string[]) {
 function AllProducts() {
   const dispatch = useAppDispatch();
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [sortLabel, setSortLabel] = useState("A-z")
+  const [sortBy, setSortBy] = useState("name");
   const products = useAppSelector((store) => store.products.products);
 
   useEffect(() => {
-    dispatch(getAllProductsAsync({ page: "1" }))
-  }, [dispatch])
+    if (selectedCategory === "") {
+      dispatch(getAllProductsAsync({ page: "1", sortBy: sortBy }))
+    } else {
+      dispatch(getAllProductsAsync({ page: "1", sortBy: sortBy, filterBy: selectedCategory }))
+    }
+  }, [dispatch, selectedCategory, sortBy])
 
   const handleSortAscending = () => {
-    dispatch(getAllProductsAsync({ page: "1", sortBy: "name" }))
+    setSortBy("name")
+    setSortLabel("A-z")
   }
 
   const handleSortDescending = () => {
-    dispatch(getAllProductsAsync({ page: "1", sortBy: "-name" }))
+    setSortBy("-name")
+    setSortLabel("Z-a")
+  }
+
+  const handleCategoryFilter = (category: string) => {
+    setSelectedCategory(category);
+  }
+
+  const handleUncheckedCategoryFilter = () => {
+    setSelectedCategory("");
   }
 
   const sortOptions = [
@@ -42,11 +57,10 @@ function AllProducts() {
       id: 'category',
       name: 'Category',
       options: [
-        { value: 'all_products', label: 'All Products', checked: true },
-        { value: 'clothing', label: 'Clothing', checked: false },
-        { value: 'sports', label: 'Sports', checked: false },
-        { value: 'gaming', label: 'Gaming', checked: false },
-        { value: 'accessories', label: 'Accessories', checked: false },
+        { value: 'clothing', label: 'Clothing' },
+        { value: 'sports', label: 'Sports' },
+        { value: 'gaming', label: 'Gaming' },
+        { value: 'accessories', label: 'Accessories' },
       ],
     },
   ]
@@ -121,8 +135,14 @@ function AllProducts() {
                                         name={`${section.id}[]`}
                                         defaultValue={option.value}
                                         type="checkbox"
-                                        defaultChecked={option.checked}
                                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                        onChange={(event) => {
+                                          if (event.target.checked) {
+                                            handleCategoryFilter(option.value);
+                                          } else {
+                                            handleUncheckedCategoryFilter();
+                                          }
+                                        }}
                                       />
                                       <label
                                         htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
@@ -152,7 +172,7 @@ function AllProducts() {
                 <Menu as="div" className="relative inline-block text-left">
                   <div>
                     <Menu.Button className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
-                      Sort
+                      Sort : {sortLabel}
                       <ChevronDownIcon
                         className="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                         aria-hidden="true"
@@ -237,8 +257,14 @@ function AllProducts() {
                                     name={`${section.id}[]`}
                                     defaultValue={option.value}
                                     type="checkbox"
-                                    defaultChecked={option.checked}
                                     className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                    onChange={(event) => {
+                                      if (event.target.checked) {
+                                        handleCategoryFilter(option.value);
+                                      } else {
+                                        handleUncheckedCategoryFilter();
+                                      }
+                                    }}
                                   />
                                   <label
                                     htmlFor={`filter-${section.id}-${optionIdx}`}
