@@ -51,8 +51,8 @@ const initialState: productState = {
     imageUrl: null,
     category: null,
     description: null,
-    stock: null,
     quantity: null,
+    stock: null,
     reviews: [
       {
         user: null,

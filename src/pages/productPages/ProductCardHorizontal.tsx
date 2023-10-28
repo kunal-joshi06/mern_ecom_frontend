@@ -1,53 +1,31 @@
 import { Link } from "react-router-dom";
 import { ProductType } from "../../store/features/products/productType";
+import StarRating from "../../components/ProductDetails/StarRating";
 
 const ProductCardHorizontal = (product: ProductType) => {
-    return (<div>
-        <div className="relative flex h-full w-full max-w-[48rem] flex-row rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
-            <div className="relative m-0 w-2/5 shrink-0 overflow-hidden rounded-xl rounded-r-none bg-white bg-clip-border text-gray-700">
-                {product.imageUrl && <img
-                    src={product.imageUrl}
-                    alt="image"
-                    className="h-full w-full object-contain"
-                />}
+    return (
+        <div className="w-full h-full p-4 flex flex-row justify-between bg-white border-2 border-gray-100 rounded-lg shadow-md">
+            <div className="min:h-full min:w-full flex justify-center items-center">
+                {product.imageUrl && <img className="object-contain" src={product?.imageUrl} alt="product image" />}
+            </div>
+            <div className="pl-5 flex flex-col min:h-full min:w-full">
+                <div className="h-1/2 min:w-full overflow-hidden">
+                    <h5 className="text-xl font-semibold tracking-tight text-gray-900 ">{product?.name}</h5>
+                </div>
+                <div className="h-1/2">
+                    <div className="flex items-center mt-2.5 mb-5">
+                        {product.rating && <StarRating rating={product?.rating} />}
+                        {product.rating && <span className="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">{Math.ceil(product?.rating)}</span>}
+                    </div>
+                    <div className="flex items-center justify-between">
+                        <span className="text-lg font-bold text-gray-500">₹{product?.price}</span>
+                        {product._id && <Link to={product._id} className="text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">View</Link>}
+                    </div>
+                </div>
 
             </div>
-            <div className="p-6">
-                <h6 className="mb-4 block font-sans text-base font-semibold uppercase leading-relaxed tracking-normal text-pink-500 antialiased">
-                    {product.category}
-                </h6>
-                <h4 className="mb-2 block font-sans text-2xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
-                    {product.name}
-                </h4>
-                <p className="mb-8 block font-sans text-base font-normal leading-relaxed text-gray-700 antialiased">
-                    {product.description}
-                </p>
-                {product._id && <Link className="inline-block" to={product._id}>
-                    <button
-                        className="flex select-none items-center gap-2 rounded-lg py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-pink-500 transition-all hover:bg-pink-500/10 active:bg-pink-500/30 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                        type="button"
-                    >
-                        View
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="2"
-                            stroke="currentColor"
-                            aria-hidden="true"
-                            className="h-4 w-4"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-                            ></path>
-                        </svg>
-                    </button>
-                </Link>}
-            </div>
         </div>
-    </div>)
+    )
 }
 
 export default ProductCardHorizontal;

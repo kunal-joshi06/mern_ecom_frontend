@@ -230,7 +230,7 @@ function AllProducts() {
               </div>
             </div>
 
-            <section aria-labelledby="products-heading" className="pb-24 pt-6">
+            <section aria-labelledby="products-heading" >
               <h2 id="products-heading" className="sr-only">
                 Products
               </h2>
@@ -288,9 +288,9 @@ function AllProducts() {
                     </Disclosure>
                   ))}
                 </form>
-                <div className="bg-white lg:col-span-3 ">
+                <div className="bg-white h-screen no-scrollbar overflow-auto lg:col-span-3 ">
                   <div className="container mx-auto max-full">
-                    <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6 p-4 place-items-center">
                       {products.map((product: ProductType, index: number) => (<ProductCardHorizontal key={index} {...product} />))}
                     </div>
                   </div>
