@@ -1,12 +1,35 @@
 import axios from "axios";
 const apiUrl = import.meta.env.VITE_FRONTEND_URL;
 
-export const getAllProducts = async (queryParams ?: Record<string, string>) => {
+export const getAllProducts = async (queryParams?: {
+  page?: string;
+  sortBy?: string;
+  filterBy?: string[];
+}) => {
   try {
     let reqUrl = `${apiUrl}/products`;
-    if(queryParams){
-      reqUrl += `?${new URLSearchParams(queryParams).toString()}`;
+    if (queryParams) {
+      const { page, sortBy, filterBy } = queryParams;
+
+      const searchParams = new URLSearchParams();
+
+      if (page) {
+        searchParams.append("page", page);
+      }
+
+      if (sortBy) {
+        searchParams.append("sortBy", sortBy);
+      }
+
+      if (filterBy) {
+        filterBy.forEach((filter) => {
+          searchParams.append("filterBy", filter);
+        });
+      }
+
+      reqUrl += `?${searchParams.toString()}`;
     }
+
     const response = await axios.get(reqUrl);
     return response;
   } catch (error) {

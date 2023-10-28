@@ -16,17 +16,22 @@ function classNames(...classes: string[]) {
 function AllProducts() {
   const dispatch = useAppDispatch();
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
   const [sortLabel, setSortLabel] = useState("A-z")
   const [sortBy, setSortBy] = useState("name");
   const products = useAppSelector((store) => store.products.products);
 
   useEffect(() => {
-    if (selectedCategory === "") {
-      dispatch(getAllProductsAsync({ page: "1", sortBy: sortBy }))
-    } else {
-      dispatch(getAllProductsAsync({ page: "1", sortBy: sortBy, filterBy: selectedCategory }))
-    }
+    const queryParams: {
+      page?: string;
+      sortBy?: string;
+      filterBy?: string[];
+    } = {
+      page: "1",
+      sortBy: sortBy,
+      filterBy: selectedCategory,
+    };
+    dispatch(getAllProductsAsync(queryParams))
   }, [dispatch, selectedCategory, sortBy])
 
   const handleSortAscending = () => {
@@ -40,11 +45,13 @@ function AllProducts() {
   }
 
   const handleCategoryFilter = (category: string) => {
-    setSelectedCategory(category);
+    setSelectedCategory((prevSelectedCategories) => [...prevSelectedCategories, category]);
   }
 
-  const handleUncheckedCategoryFilter = () => {
-    setSelectedCategory("");
+  const handleUncheckedCategoryFilter = (category: string) => {
+    setSelectedCategory((prevSelectedCategories) =>
+      prevSelectedCategories.filter((item) => item !== category)
+    );
   }
 
   const sortOptions = [
@@ -140,7 +147,7 @@ function AllProducts() {
                                           if (event.target.checked) {
                                             handleCategoryFilter(option.value);
                                           } else {
-                                            handleUncheckedCategoryFilter();
+                                            handleUncheckedCategoryFilter(option.value);
                                           }
                                         }}
                                       />
@@ -262,7 +269,7 @@ function AllProducts() {
                                       if (event.target.checked) {
                                         handleCategoryFilter(option.value);
                                       } else {
-                                        handleUncheckedCategoryFilter();
+                                        handleUncheckedCategoryFilter(option.value);
                                       }
                                     }}
                                   />

@@ -3,8 +3,12 @@ import { getAllProducts, getProductDetails } from "./productApi";
 import { ProductType } from "./productType";
 
 const getAllProductsAsync = createAsyncThunk(
-  "store/getAllProducts",
-  async (queryParams?: Record<string, string>) => {
+  "products/getAllProducts",
+  async (queryParams?: {
+    page?: string;
+    sortBy?: string;
+    filterBy?: string[];
+  }) => {
     try {
       const response = await getAllProducts(queryParams);
       return response.data;
