@@ -1,4 +1,3 @@
-import { To } from "react-router-dom";
 
 export type ProductResponse = {
   id: string;
@@ -13,11 +12,11 @@ export type ProductResponse = {
 };
 
 export type ProductType = {
-  _id: string | To;
+  _id: string | null;
   name: string | null;
   price: number | null;
   rating: number | null;
-  imageUrl: string | undefined;
+  imageUrl: string | null;
   category: string | null;
   description: string | null;
   stock: number | null;

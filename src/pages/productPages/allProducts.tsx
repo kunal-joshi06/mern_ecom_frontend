@@ -240,7 +240,7 @@ function AllProducts() {
                 </form>
                 <div className="bg-white h-screen no-scrollbar overflow-auto lg:col-span-3 ">
                   <div className="container mx-auto max-full">
-                    <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6 p-4">
+                    <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6 p-4 place-items-center">
                       {products.map((product: ProductType, index: number) => (<ProductCardHorizontal key={index} {...product} />))}
                     </div>
                   </div>
