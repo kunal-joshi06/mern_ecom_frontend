@@ -20,7 +20,7 @@ const ProductDetail = () => {
     const handleAddToCart = (product: ProductType) => {
         isLoggedIn ? dispatch(addItemToCart(product)) : toast.error("Please Login To Add Item")
     }
- 
+
     useEffect(() => {
         if (pId) {
             dispatch(getProductDetailsAsync(pId))
@@ -84,9 +84,9 @@ const ProductDetail = () => {
                                 <div className="max-h-60 overflow-y-scroll no-scrollbar px-6 pb-6">
                                     {currentProduct.reviews.map((review, index: number) => (
                                         <div key={index} className="border-gray-200 card-shadow p-4 mt-5">
-                                              <div>
+                                            <div>
                                                 <div className="flex justify-between items-center">
-                                                 <StarRating className="text-sm" rating={review?.rating} />
+                                                    {review.rating && <StarRating rating={review?.rating} />}
                                                 </div>
                                             </div>
                                             <div>
@@ -96,7 +96,7 @@ const ProductDetail = () => {
                                             </div>
                                             <div>
                                                 <div className="flex justify-between items-center">
-                                                   <span>by: {review?.name}</span>
+                                                    <span>by: {review?.name}</span>
                                                 </div>
 
                                             </div>
