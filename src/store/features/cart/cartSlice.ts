@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { ProductType } from "../products/productType";
 import { toast } from "react-hot-toast";
+import { logoutUserAsync } from "../auth/authSlice";
 
 export interface CartState {
   openState: boolean;
@@ -124,6 +125,13 @@ export const cartSlice = createSlice({
         }, 0);
       }
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(logoutUserAsync.fulfilled, (state) => {
+      state.cartItems = [];
+      state.totalItems = 0;
+      state.cartTotal = 0;
+    });
   },
 });
 

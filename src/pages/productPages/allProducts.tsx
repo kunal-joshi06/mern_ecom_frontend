@@ -1,39 +1,77 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import ProductCardHorizontal from "./ProductCardHorizontal";
-import { useAppSelector } from "../../store/hooks"
+import { useAppDispatch, useAppSelector } from "../../store/hooks"
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon } from '@heroicons/react/20/solid'
 import Pagination from "../pagination";
 import { ProductType } from '../../store/features/products/productType';
+import { getAllProductsAsync } from '../../store/features/products/productSlice';
 
-const sortOptions = [
-  { name: 'A-z', href: '#', current: true },
-  { name: 'Z-a', href: '#', current: false },
-]
-const filters = [
-  {
-    id: 'category',
-    name: 'Category',
-    options: [
-      { value: 'all_products', label: 'All Products', checked: true },
-      { value: 'clothing', label: 'Clothing', checked: false },
-      { value: 'sports', label: 'Sports', checked: false },
-      { value: 'gaming', label: 'Gaming', checked: false },
-      { value: 'accessories', label: 'Accessories', checked: false },
-    ],
-  },
-
-]
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
 function AllProducts() {
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
+  const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
+  const [sortLabel, setSortLabel] = useState("A-z")
+  const [sortBy, setSortBy] = useState("name");
   const products = useAppSelector((store) => store.products.products);
+
+  useEffect(() => {
+    const queryParams: {
+      page?: string;
+      sortBy?: string;
+      filterBy?: string[];
+    } = {
+      page: "1",
+      sortBy: sortBy,
+      filterBy: selectedCategory,
+    };
+    dispatch(getAllProductsAsync(queryParams))
+  }, [dispatch, selectedCategory, sortBy])
+
+  const handleSortAscending = () => {
+    setSortBy("name")
+    setSortLabel("A-z")
+  }
+
+  const handleSortDescending = () => {
+    setSortBy("-name")
+    setSortLabel("Z-a")
+  }
+
+  const handleCategoryFilter = (category: string) => {
+    setSelectedCategory((prevSelectedCategories) => [...prevSelectedCategories, category]);
+  }
+
+  const handleUncheckedCategoryFilter = (category: string) => {
+    setSelectedCategory((prevSelectedCategories) =>
+      prevSelectedCategories.filter((item) => item !== category)
+    );
+  }
+
+  const sortOptions = [
+    { name: 'A-z', current: true, action: handleSortAscending },
+    { name: 'Z-a', current: false, action: handleSortDescending },
+  ]
+
+  const filters = [
+    {
+      id: 'category',
+      name: 'Category',
+      options: [
+        { value: 'clothing', label: 'Clothing' },
+        { value: 'sports', label: 'Sports' },
+        { value: 'gaming', label: 'Gaming' },
+        { value: 'accessories', label: 'Accessories' },
+      ],
+    },
+  ]
+
   return (
     <>
       <div className="bg-white">
@@ -104,8 +142,14 @@ function AllProducts() {
                                         name={`${section.id}[]`}
                                         defaultValue={option.value}
                                         type="checkbox"
-                                        defaultChecked={option.checked}
                                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                        onChange={(event) => {
+                                          if (event.target.checked) {
+                                            handleCategoryFilter(option.value);
+                                          } else {
+                                            handleUncheckedCategoryFilter(option.value);
+                                          }
+                                        }}
                                       />
                                       <label
                                         htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
@@ -135,7 +179,7 @@ function AllProducts() {
                 <Menu as="div" className="relative inline-block text-left">
                   <div>
                     <Menu.Button className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
-                      Sort
+                      Sort : {sortLabel}
                       <ChevronDownIcon
                         className="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                         aria-hidden="true"
@@ -157,8 +201,8 @@ function AllProducts() {
                         {sortOptions.map((option) => (
                           <Menu.Item key={option.name}>
                             {({ active }) => (
-                              <a
-                                href={option.href}
+                              <div
+                                onClick={option.action}
                                 className={classNames(
                                   option.current ? 'font-medium text-gray-900' : 'text-gray-500',
                                   active ? 'bg-gray-100' : '',
@@ -166,7 +210,7 @@ function AllProducts() {
                                 )}
                               >
                                 {option.name}
-                              </a>
+                              </div>
                             )}
                           </Menu.Item>
                         ))}
@@ -220,8 +264,14 @@ function AllProducts() {
                                     name={`${section.id}[]`}
                                     defaultValue={option.value}
                                     type="checkbox"
-                                    defaultChecked={option.checked}
                                     className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                    onChange={(event) => {
+                                      if (event.target.checked) {
+                                        handleCategoryFilter(option.value);
+                                      } else {
+                                        handleUncheckedCategoryFilter(option.value);
+                                      }
+                                    }}
                                   />
                                   <label
                                     htmlFor={`filter-${section.id}-${optionIdx}`}
