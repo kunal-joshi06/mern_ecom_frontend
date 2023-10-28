@@ -1,4 +1,4 @@
-import { Navigate, RouterProvider, createBrowserRouter } from "react-router-dom"
+import { RouterProvider, createBrowserRouter } from "react-router-dom"
 import { useEffect } from "react";
 import Home from "./pages/Home"
 import Layout from "./components/Layout"
@@ -14,7 +14,7 @@ import AllProducts from "./pages/productPages/AllProducts";
 function App() {
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(getAllProductsAsync({ page: "1", limit:"4" }))
+    dispatch(getAllProductsAsync({ page: "1", limit: "4" }))
   }, [dispatch])
 
 
