@@ -1,40 +1,56 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import ProductCardHorizontal from "./ProductCardHorizontal";
-import { useAppSelector } from "../../store/hooks"
+import { useAppDispatch, useAppSelector } from "../../store/hooks"
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon } from '@heroicons/react/20/solid'
-import Footer from "../../components/Footer";
 import Pagination from "../pagination";
 import { ProductType } from '../../store/features/products/productType';
+import { getAllProductsAsync } from '../../store/features/products/productSlice';
 
-const sortOptions = [
-  { name: 'A-z', href: '#', current: true },
-  { name: 'Z-a', href: '#', current: false },
-]
-const filters = [
-  {
-    id: 'category',
-    name: 'Category',
-    options: [
-      { value: 'all_products', label: 'All Products', checked: true },
-      { value: 'clothing', label: 'Clothing', checked: false },
-      { value: 'sports', label: 'Sports', checked: false },
-      { value: 'gaming', label: 'Gaming', checked: false },
-      { value: 'accessories', label: 'Accessories', checked: false },
-    ],
-  },
 
-]
+
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
 function AllProducts() {
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
   const products = useAppSelector((store) => store.products.products);
+
+  useEffect(() => {
+    dispatch(getAllProductsAsync({ page: "1" }))
+  }, [dispatch])
+
+  const handleSortAscending = () => {
+    dispatch(getAllProductsAsync({ page: "1", sortBy: "name" }))
+  }
+
+  const handleSortDescending = () => {
+    dispatch(getAllProductsAsync({ page: "1", sortBy: "-name" }))
+  }
+
+  const sortOptions = [
+    { name: 'A-z', current: true, action: handleSortAscending },
+    { name: 'Z-a', current: false, action: handleSortDescending },
+  ]
+
+  const filters = [
+    {
+      id: 'category',
+      name: 'Category',
+      options: [
+        { value: 'all_products', label: 'All Products', checked: true },
+        { value: 'clothing', label: 'Clothing', checked: false },
+        { value: 'sports', label: 'Sports', checked: false },
+        { value: 'gaming', label: 'Gaming', checked: false },
+        { value: 'accessories', label: 'Accessories', checked: false },
+      ],
+    },
+  ]
+
   return (
     <>
       <div className="bg-white">
@@ -158,8 +174,8 @@ function AllProducts() {
                         {sortOptions.map((option) => (
                           <Menu.Item key={option.name}>
                             {({ active }) => (
-                              <a
-                                href={option.href}
+                              <div
+                                onClick={option.action}
                                 className={classNames(
                                   option.current ? 'font-medium text-gray-900' : 'text-gray-500',
                                   active ? 'bg-gray-100' : '',
@@ -167,7 +183,7 @@ function AllProducts() {
                                 )}
                               >
                                 {option.name}
-                              </a>
+                              </div>
                             )}
                           </Menu.Item>
                         ))}
@@ -258,7 +274,6 @@ function AllProducts() {
         </div>
       </div>
       <Pagination />
-      <Footer />
     </>
   )
 }
