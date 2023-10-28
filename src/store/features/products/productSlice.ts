@@ -8,6 +8,7 @@ const getAllProductsAsync = createAsyncThunk(
     page?: string;
     sortBy?: string;
     filterBy?: string[];
+    limit?: string;
   }) => {
     try {
       const response = await getAllProducts(queryParams);

@@ -5,6 +5,7 @@ export const getAllProducts = async (queryParams?: {
   page?: string;
   sortBy?: string;
   filterBy?: string[];
+  limit?: string;
 }) => {
   try {
     let reqUrl = `${apiUrl}/products`;

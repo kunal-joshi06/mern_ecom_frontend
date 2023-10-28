@@ -6,8 +6,16 @@ import Register from "./pages/Register"
 import { Toaster } from 'react-hot-toast';
 import ProductDetail from "./pages/productPages/ProductDetail";
 import AllProducts from "./pages/productPages/AllProducts";
+import { useAppDispatch } from "./store/hooks"
+import { useEffect } from "react"
+import { getAllProductsAsync } from "./store/features/products/productSlice"
 
 function App() {
+
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(getAllProductsAsync({ page: "1", limit: "4" }))
+  }, [dispatch])
 
   const router = createBrowserRouter([
     {
