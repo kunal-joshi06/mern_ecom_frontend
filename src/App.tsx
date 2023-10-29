@@ -6,8 +6,8 @@ import Register from "./pages/Register"
 import { Toaster } from 'react-hot-toast';
 import ProductDetail from "./pages/productPages/ProductDetail";
 import AllProducts from "./pages/productPages/AllProducts"
-import PaymentSuccess from "./pages/payments/paymentSuccess"
 import PaymentCancel from "./pages/payments/paymentFailed"
+import PaymentSuccess from "./pages/payments/PaymentSuccess"
 
 
 function App() {
