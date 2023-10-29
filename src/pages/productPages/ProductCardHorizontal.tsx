@@ -14,8 +14,9 @@ const ProductCardHorizontal = (product: ProductType) => {
                 </div>
                 <div className="h-1/2">
                     <div className="flex items-center mt-2.5 mb-5">
-                        {product.rating && <StarRating rating={product?.rating} />}
-                        {product.rating && <span className="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">{Math.ceil(product?.rating)}</span>}
+                     {product.rating ? <StarRating rating={product?.rating} /> : <StarRating rating={0} />} 
+                     {product.rating ? <span className="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">{Math.ceil(product?.rating)}</span>:
+                     <span className="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">0</span>}
                     </div>
                     <div className="flex items-center justify-between">
                         <span className="text-lg font-bold text-gray-500">₹{product?.price}</span>
