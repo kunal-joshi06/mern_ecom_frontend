@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { registerUser} from "./userApi";
 import { RegisterRequest } from "./userTypes";
+
 import toast from "react-hot-toast";
 
 const registerUserAsync = createAsyncThunk(
