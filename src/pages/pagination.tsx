@@ -1,37 +1,32 @@
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
-import { useAppSelector, useAppDispatch } from '../store/hooks'
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
+import { useAppSelector, useAppDispatch } from '../store/hooks';
 import { useEffect, useState } from 'react';
-import { getAllProductsAsync } from '../store/features/products/productSlice';
+import { setPage } from '../store/features/products/productSlice';
 
-export default function Pagination() {
-  const dispatch = useAppDispatch();
+function PaginationComponent() {
   const { limit, page, totalProducts } = useAppSelector((store) => store.products);
-  const [currentPage, setCurrentPage] = useState(page);
   const [initialProductCount, setInitialProductCount] = useState(1);
   const [finalProductCount, setFinalProductCount] = useState(limit);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getAllProductsAsync({ page: currentPage.toString(), limit: "8" }));
-  }, [currentPage, dispatch]);
-
-  useEffect(() => {
-    setInitialProductCount((currentPage - 1) * limit + 1);
-    setFinalProductCount(Math.min(currentPage * limit, totalProducts));
-  }, [currentPage, limit, totalProducts]);
+    setInitialProductCount((page - 1) * limit + 1);
+    setFinalProductCount(Math.min(page * limit, totalProducts));
+  }, [page, limit, totalProducts]);
 
   const totalPages = Math.ceil(totalProducts / limit);
 
   const handlePrev = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
+    if (page > 1) {
+      dispatch(setPage(page - 1));
     }
-  }
+  };
 
   const handleNext = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
+    if (page < totalPages) {
+      dispatch(setPage(page + 1));
     }
-  }
+  };
 
   return (
     <>
@@ -44,7 +39,7 @@ export default function Pagination() {
             >
               Previous
             </div>
-            {currentPage === totalPages ? (
+            {page === totalPages ? (
               <></>
             ) : (
               <div
@@ -76,11 +71,11 @@ export default function Pagination() {
 
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map((val) => (
                   <div
-                    onClick={() => setCurrentPage(val)}
+                    onClick={() => dispatch(setPage(val))} // Use dispatch to set the new page
                     key={val}
                     aria-current="page"
                     className={
-                      currentPage === val
+                      page === val
                         ? 'relative z-10 inline-flex items-center bg-blue-500 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
                         : 'relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover.bg-gray-50 focus:z-20 focus:outline-offset-0'
                     }
@@ -107,3 +102,5 @@ export default function Pagination() {
     </>
   );
 }
+
+export default PaginationComponent;

@@ -43,7 +43,7 @@ export interface productState {
 const initialState: productState = {
   page: 1,
   totalProducts: 0,
-  limit: 0,
+  limit: 8,
   products: [],
   currentProduct: {
     _id: null,
@@ -71,7 +71,11 @@ const initialState: productState = {
 export const productSlice = createSlice({
   name: "products",
   initialState,
-  reducers: {},
+  reducers: {
+    setPage: (state, action) => {
+      state.page = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getAllProductsAsync.pending, (state) => {
@@ -100,5 +104,6 @@ export const productSlice = createSlice({
   },
 });
 
+export const { setPage } = productSlice.actions;
 export { getAllProductsAsync, getProductDetailsAsync };
 export default productSlice.reducer;

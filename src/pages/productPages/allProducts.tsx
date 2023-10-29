@@ -19,7 +19,7 @@ function AllProducts() {
   const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
   const [sortLabel, setSortLabel] = useState("A-z")
   const [sortBy, setSortBy] = useState("name");
-  const products = useAppSelector((store) => store.products.products);
+  const { products, page, limit } = useAppSelector((store) => store.products);
 
   useEffect(() => {
     const queryParams: {
@@ -28,13 +28,15 @@ function AllProducts() {
       filterBy?: string[];
       limit?: string
     } = {
-      page: "1",
+      page: page.toString(),
       sortBy: sortBy,
       filterBy: selectedCategory,
-      limit: "8"
+      limit: limit.toString()
     };
+
     dispatch(getAllProductsAsync(queryParams))
-  }, [dispatch, selectedCategory, sortBy])
+
+  }, [dispatch, limit, page, selectedCategory, sortBy])
 
   const handleSortAscending = () => {
     setSortBy("name")
