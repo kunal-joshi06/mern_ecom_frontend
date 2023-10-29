@@ -4,9 +4,9 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks"
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon } from '@heroicons/react/20/solid'
-import Pagination from "../pagination";
 import { ProductType } from '../../store/features/products/productType';
 import { getAllProductsAsync } from '../../store/features/products/productSlice';
+import Pagination from '../pagination';
 
 
 function classNames(...classes: string[]) {

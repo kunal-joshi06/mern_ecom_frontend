@@ -35,6 +35,7 @@ export interface productState {
   page: number;
   totalProducts: number;
   products: ProductType[];
+  limit: number;
   loading: "idle" | "pending" | "succeeded" | "failed";
   currentProduct: ProductType;
 }
@@ -42,6 +43,7 @@ export interface productState {
 const initialState: productState = {
   page: 1,
   totalProducts: 0,
+  limit: 0,
   products: [],
   currentProduct: {
     _id: null,
@@ -80,6 +82,7 @@ export const productSlice = createSlice({
         state.page = action.payload.page;
         state.totalProducts = action.payload.totalProducts;
         state.products = action.payload.products;
+        state.limit = action.payload.limit;
       })
       .addCase(getAllProductsAsync.rejected, (state: productState) => {
         state.loading = "failed";

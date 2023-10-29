@@ -14,7 +14,7 @@ function App() {
 
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(getAllProductsAsync({ page: "1", limit: "4" }))
+    dispatch(getAllProductsAsync({ page: "1", limit: "8" }))
   }, [dispatch])
 
   const router = createBrowserRouter([
