@@ -5,7 +5,10 @@ import Login from "./pages/Login"
 import Register from "./pages/Register"
 import { Toaster } from 'react-hot-toast';
 import ProductDetail from "./pages/productPages/ProductDetail";
-import AllProducts from "./pages/productPages/allProducts"
+import AllProducts from "./pages/productPages/AllProducts"
+import PaymentSuccess from "./pages/payments/paymentSuccess"
+import PaymentCancel from "./pages/payments/paymentFailed"
+
 
 function App() {
 
@@ -30,7 +33,16 @@ function App() {
     {
       path: "products/:pId",
       element: <Layout><ProductDetail /></Layout>
+    },
+    {
+      path: "/payment-success",
+      element: <PaymentSuccess />
+    },
+    {
+      path: "/payment-cancel",
+      element: <PaymentCancel />
     }
+
   ])
 
   return (<>
