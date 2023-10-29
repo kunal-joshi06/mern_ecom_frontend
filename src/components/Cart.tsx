@@ -4,9 +4,12 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 import { decreaseQuantity, increaseQuantity, removeItemFromCart, setClose } from '../store/features/cart/cartSlice'
 import { Link } from 'react-router-dom'
+import { loadStripe } from '@stripe/stripe-js';
+import { createCheckout } from '../store/features/cart/cartApi'
 
 
 export default function Cart() {
+    const stripeKey = import.meta.env.VITE_STRIPE_KEY;
     const dispatch = useAppDispatch()
     const isCartOpen = useAppSelector(state => state.cart.openState)
     const isLoggedIn = useAppSelector(state => state.auth.user.isLoggedIn)
@@ -30,6 +33,23 @@ export default function Cart() {
     const handleDecreaseQty = (id: string) => {
         dispatch(decreaseQuantity(id))
     }
+
+    const handlePayment = async () => {
+        const stripe = await loadStripe(stripeKey);
+
+        try {
+            const response = await createCheckout(products);
+            const result = await stripe?.redirectToCheckout({
+                sessionId: response.data.id,
+            });
+
+            if (result?.error) {
+                console.log(result.error);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     return (
         <Transition.Root show={isCartOpen} as={Fragment}>
@@ -75,6 +95,11 @@ export default function Cart() {
                                                     </button>
                                                 </div>
                                             </div>
+
+                                            {products.length < 1 && isLoggedIn && (
+                                                <h3 className="mt-8 text-lg font-bold text-gray-900">Your Cart is Empty. Add items in the cart to view.</h3>
+                                            )}
+
 
                                             {isLoggedIn ? (
                                                 <div className="mt-8">
@@ -126,7 +151,8 @@ export default function Cart() {
                                             )}
                                         </div>
 
-                                        {isLoggedIn && (
+
+                                        {isLoggedIn && products.length > 0 && (
                                             <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                                                 <div className="flex justify-between text-base font-medium text-gray-900">
                                                     <p>Subtotal</p>
@@ -134,15 +160,17 @@ export default function Cart() {
                                                 </div>
                                                 <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                                                 <div className="mt-6">
-                                                    <a
-                                                        href="#"
-                                                        className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover-bg-indigo-700"
+                                                    <button
+                                                        onClick={handlePayment}
+                                                        className="cursor-pointer flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover-bg-indigo-700"
                                                     >
                                                         Checkout
-                                                    </a>
+                                                    </button>
                                                 </div>
                                             </div>
                                         )}
+
+
                                     </div>
                                 </Dialog.Panel>
                             </Transition.Child>

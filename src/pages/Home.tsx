@@ -1,11 +1,19 @@
 // import HomeSlider from '../components/homeSlider';
-import { useAppSelector } from "../store/hooks"
+import { useAppDispatch, useAppSelector } from "../store/hooks"
 import ProductCardVertical from "./productPages/ProductCardVertical";
 import HomeSlider from "../components/homeSlider";
 import { ProductType } from "../store/features/products/productType";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { getAllProductsAsync } from "../store/features/products/productSlice";
 
 const Home = () => {
+
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(getAllProductsAsync({ page: "1", limit: "8" }))
+  }, [dispatch])
+
   const products = useAppSelector((store) => store.products.products);
   return (
     <main>

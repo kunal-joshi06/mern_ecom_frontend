@@ -5,17 +5,13 @@ import Login from "./pages/Login"
 import Register from "./pages/Register"
 import { Toaster } from 'react-hot-toast';
 import ProductDetail from "./pages/productPages/ProductDetail";
-import { useAppDispatch } from "./store/hooks"
-import { useEffect } from "react"
-import { getAllProductsAsync } from "./store/features/products/productSlice"
-import AllProducts from "./pages/productPages/allProducts"
+import AllProducts from "./pages/productPages/AllProducts"
+import PaymentCancel from "./pages/payments/paymentFailed"
+import PaymentSuccess from "./pages/payments/PaymentSuccess"
+
 
 function App() {
 
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(getAllProductsAsync({ page: "1", limit: "4" }))
-  }, [dispatch])
 
   const router = createBrowserRouter([
     {
@@ -37,7 +33,16 @@ function App() {
     {
       path: "products/:pId",
       element: <Layout><ProductDetail /></Layout>
+    },
+    {
+      path: "/payment-success",
+      element: <PaymentSuccess />
+    },
+    {
+      path: "/payment-cancel",
+      element: <PaymentCancel />
     }
+
   ])
 
   return (<>

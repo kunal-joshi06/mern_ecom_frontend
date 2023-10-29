@@ -10,7 +10,7 @@ export const getAllProducts = async (queryParams?: {
   try {
     let reqUrl = `${apiUrl}/products`;
     if (queryParams) {
-      const { page, sortBy, filterBy } = queryParams;
+      const { page, sortBy, filterBy, limit } = queryParams;
 
       const searchParams = new URLSearchParams();
 
@@ -26,6 +26,10 @@ export const getAllProducts = async (queryParams?: {
         filterBy.forEach((filter) => {
           searchParams.append("filterBy", filter);
         });
+      }
+
+      if (limit) {
+        searchParams.append("limit", limit);
       }
 
       reqUrl += `?${searchParams.toString()}`;

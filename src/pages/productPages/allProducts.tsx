@@ -4,9 +4,9 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks"
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon } from '@heroicons/react/20/solid'
-import Pagination from "../pagination";
 import { ProductType } from '../../store/features/products/productType';
 import { getAllProductsAsync } from '../../store/features/products/productSlice';
+import Pagination from '../pagination';
 
 
 function classNames(...classes: string[]) {
@@ -19,20 +19,24 @@ function AllProducts() {
   const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
   const [sortLabel, setSortLabel] = useState("A-z")
   const [sortBy, setSortBy] = useState("name");
-  const products = useAppSelector((store) => store.products.products);
+  const { products, page, limit } = useAppSelector((store) => store.products);
 
   useEffect(() => {
     const queryParams: {
       page?: string;
       sortBy?: string;
       filterBy?: string[];
+      limit?: string
     } = {
-      page: "1",
+      page: page.toString(),
       sortBy: sortBy,
       filterBy: selectedCategory,
+      limit: limit.toString()
     };
+
     dispatch(getAllProductsAsync(queryParams))
-  }, [dispatch, selectedCategory, sortBy])
+
+  }, [dispatch, limit, page, selectedCategory, sortBy])
 
   const handleSortAscending = () => {
     setSortBy("name")
