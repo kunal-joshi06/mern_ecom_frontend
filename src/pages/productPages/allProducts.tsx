@@ -26,10 +26,12 @@ function AllProducts() {
       page?: string;
       sortBy?: string;
       filterBy?: string[];
+      limit?: string
     } = {
       page: "1",
       sortBy: sortBy,
       filterBy: selectedCategory,
+      limit: "8"
     };
     dispatch(getAllProductsAsync(queryParams))
   }, [dispatch, selectedCategory, sortBy])

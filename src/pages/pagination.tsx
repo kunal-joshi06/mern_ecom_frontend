@@ -11,11 +11,10 @@ export default function Pagination() {
   const [finalProductCount, setFinalProductCount] = useState(limit);
 
   useEffect(() => {
-    dispatch(getAllProductsAsync({ page: currentPage.toString(), limit: "6" }));
+    dispatch(getAllProductsAsync({ page: currentPage.toString(), limit: "8" }));
   }, [currentPage, dispatch]);
 
   useEffect(() => {
-    // When the page changes, update the product count
     setInitialProductCount((currentPage - 1) * limit + 1);
     setFinalProductCount(Math.min(currentPage * limit, totalProducts));
   }, [currentPage, limit, totalProducts]);
