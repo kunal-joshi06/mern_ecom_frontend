@@ -7,7 +7,7 @@ const ProductHomeCard: React.FC<ProductType> = (product) => {
             <img className="h-72 w-full object-cover object-center" src={product.imageUrl!} alt="Product Image" />
             <div className="p-4">
                 <h2 className="mb-2 text-lg font-medium dark:text-white text-gray-900">{product.name}</h2>
-                <p className="mb-2 text-base dark:text-gray-300 text-gray-700">Category: {product.category}</p>
+                <p className="mb-2 text-base dark:text-gray-300 text-gray-700 uppercase">Category: {product.category}</p>
                 <div className="flex items-center">
                     <p className="mr-2 text-lg font-semibold text-gray-900 dark:text-white">₹. {product.price}</p>
                 </div>
