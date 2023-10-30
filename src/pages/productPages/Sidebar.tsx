@@ -17,21 +17,6 @@ export default function Sidebar(className: React.HTMLAttributes<HTMLDivElement>)
         },
     ]
     const dispatch = useAppDispatch();
-    // const { filterByCategory } = useAppSelector((store) => store.products);
-    // useEffect(() => {
-    //     const queryParams: {
-    //         page?: string;
-    //         filterBy?: string[];
-    //         limit?: string
-    //     } = {
-    //         page: page.toString(),
-    //         filterBy: selectedCategory,
-    //         limit: limit.toString()
-    //     };
-
-    //     dispatch(getAllProductsAsync(queryParams))
-
-    // }, [dispatch, limit, page, selectedCategory])
 
     const handleCategoryFilter = (category: string) => {
         dispatch(setCategory(category))
