@@ -26,7 +26,7 @@ const Home = () => {
           <h2 className="text-2xl font-bold tracking-tight text-gray-900">Our top products</h2>
           <div className="container mx-auto p-4 lg:h-screen flex items-center justify-center">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-              {products.map((product: ProductType) => (<ProductHomeCard {...product} />))}
+              {products.map((product: ProductType) => (<ProductHomeCard key={product._id} {...product} />))}
             </div>
           </div>
 
