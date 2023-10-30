@@ -1,5 +1,5 @@
 export type RegisterRequest = {
-  name:string;
+  name: string;
   email: string;
   password: string;
 };
@@ -11,4 +11,10 @@ export type RegisterResponse = {
     email: string;
   };
   token: string;
+};
+
+export type UpdatePasswordRequest = {
+  oldPassword: string;
+  newPassword: string;
+  confirmPassword: string;
 };

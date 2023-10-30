@@ -17,6 +17,7 @@ export const loginUser = async (data: LoginRequest) => {
 export const logoutUser = async () => {
   try {
     const response = await axios.get(`${apiUrl}/logout`);
+    Cookies.remove("token");
     return response;
   } catch (error) {
     console.log(error);

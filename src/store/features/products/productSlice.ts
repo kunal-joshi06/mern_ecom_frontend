@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getAllProducts, getProductDetails } from "./productApi";
 import { ProductType } from "./productType";
+import { logoutUserAsync } from "../auth/authSlice";
 
 const getAllProductsAsync = createAsyncThunk(
   "products/getAllProducts",
@@ -113,6 +114,9 @@ export const productSlice = createSlice({
       })
       .addCase(getProductDetailsAsync.rejected, (state: productState) => {
         state.loading = "failed";
+      })
+      .addCase(logoutUserAsync.fulfilled, (state) => {
+        state.filterByCategory = [];
       });
   },
 });

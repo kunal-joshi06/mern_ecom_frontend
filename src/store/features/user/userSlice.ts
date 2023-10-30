@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { registerUser} from "./userApi";
-import { RegisterRequest } from "./userTypes";
-
+import { registerUser, updatePassword } from "./userApi";
+import { RegisterRequest, UpdatePasswordRequest } from "./userTypes";
 import toast from "react-hot-toast";
 
 const registerUserAsync = createAsyncThunk(
@@ -13,6 +12,14 @@ const registerUserAsync = createAsyncThunk(
   }
 );
 
+const updatePasswordAsync = createAsyncThunk(
+  "user/updatePassword",
+  async (data: UpdatePasswordRequest) => {
+    const response = await updatePassword(data);
+    console.log(response);
+    return response.data;
+  }
+);
 
 export interface userState {
   user: {
@@ -58,9 +65,20 @@ export const authSlice = createSlice({
         state.loading = "failed";
         toast.error("Registration Failed");
       })
+      .addCase(updatePasswordAsync.pending, (state) => {
+        state.loading = "pending";
+      })
+      .addCase(updatePasswordAsync.fulfilled, (state) => {
+        state.loading = "succeeded";
+        toast.success("Password Changed Successfully");
+      })
+      .addCase(updatePasswordAsync.rejected, (state) => {
+        state.loading = "failed";
+        toast.error("Failed to change password");
+      });
   },
 });
 
-export { registerUserAsync };
+export { registerUserAsync, updatePasswordAsync };
 
 export default authSlice.reducer;

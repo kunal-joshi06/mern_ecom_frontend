@@ -8,11 +8,10 @@ import ProductDetail from "./pages/productPages/ProductDetail";
 import PaymentCancel from "./pages/payments/paymentFailed"
 import PaymentSuccess from "./pages/payments/PaymentSuccess"
 import AllProducts from "./pages/productPages/AllProducts"
+import AccountSettings from "./pages/AccountSettings"
 
 
 function App() {
-
-
   const router = createBrowserRouter([
     {
       path: "/",
@@ -42,6 +41,10 @@ function App() {
       path: "/payment-cancel",
       element: <PaymentCancel />
     },
+    {
+      path: "/account-settings",
+      element: <Layout><AccountSettings /></Layout>
+    }
   ])
 
   return (<>
