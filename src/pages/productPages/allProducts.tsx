@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import ProductCardHorizontal from "./ProductCardHorizontal";
 import { useAppDispatch, useAppSelector } from "../../store/hooks"
 import { ProductType } from '../../store/features/products/productType';
@@ -6,10 +5,11 @@ import { getAllProductsAsync } from '../../store/features/products/productSlice'
 import Sidebar from './Sidebar';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import PaginationComponent from '../Pagination';
+import { useEffect } from "react";
 
 function AllProducts() {
   const dispatch = useAppDispatch();
-  const { products, page, limit } = useAppSelector((store) => store.products);
+  const { products, page, limit, filterByCategory } = useAppSelector((store) => store.products);
   useEffect(() => {
     const queryParams: {
       page?: string;
@@ -18,9 +18,10 @@ function AllProducts() {
     } = {
       page: page.toString(),
       limit: limit.toString(),
+      filterBy: filterByCategory,
     };
     dispatch(getAllProductsAsync(queryParams))
-  }, [dispatch, page, limit])
+  }, [dispatch, page, limit, filterByCategory])
 
   return (
     <>

@@ -1,8 +1,7 @@
 import { cn } from "@/lib/utils"
 import { Toggle } from "@/components/ui/toggle"
-import { useAppDispatch, useAppSelector } from "../../store/hooks"
-import { getAllProductsAsync } from '../../store/features/products/productSlice';
-import { useEffect, useState } from "react";
+import { useAppDispatch } from "../../store/hooks"
+import { removeCategory, setCategory } from '../../store/features/products/productSlice';
 
 export default function Sidebar(className: React.HTMLAttributes<HTMLDivElement>) {
     const filters = [
@@ -18,31 +17,28 @@ export default function Sidebar(className: React.HTMLAttributes<HTMLDivElement>)
         },
     ]
     const dispatch = useAppDispatch();
-    const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
-    const { page, limit } = useAppSelector((store) => store.products);
-    useEffect(() => {
-        const queryParams: {
-            page?: string;
-            filterBy?: string[];
-            limit?: string
-        } = {
-            page: page.toString(),
-            filterBy: selectedCategory,
-            limit: limit.toString()
-        };
+    // const { filterByCategory } = useAppSelector((store) => store.products);
+    // useEffect(() => {
+    //     const queryParams: {
+    //         page?: string;
+    //         filterBy?: string[];
+    //         limit?: string
+    //     } = {
+    //         page: page.toString(),
+    //         filterBy: selectedCategory,
+    //         limit: limit.toString()
+    //     };
 
-        dispatch(getAllProductsAsync(queryParams))
+    //     dispatch(getAllProductsAsync(queryParams))
 
-    }, [dispatch, limit, page, selectedCategory])
+    // }, [dispatch, limit, page, selectedCategory])
 
     const handleCategoryFilter = (category: string) => {
-        setSelectedCategory((prevSelectedCategories) => [...prevSelectedCategories, category]);
+        dispatch(setCategory(category))
     }
 
     const handleUncheckedCategoryFilter = (category: string) => {
-        setSelectedCategory((prevSelectedCategories) =>
-            prevSelectedCategories.filter((item) => item !== category)
-        );
+        dispatch(removeCategory(category))
     }
 
     return (
