@@ -5,9 +5,9 @@ import Login from "./pages/Login"
 import Register from "./pages/Register"
 import { Toaster } from 'react-hot-toast';
 import ProductDetail from "./pages/productPages/ProductDetail";
-import AllProducts from "./pages/productPages/AllProducts"
 import PaymentCancel from "./pages/payments/paymentFailed"
 import PaymentSuccess from "./pages/payments/PaymentSuccess"
+import AllProducts from "./pages/productPages/AllProducts"
 
 
 function App() {
@@ -31,7 +31,7 @@ function App() {
       element: <Layout><AllProducts /></Layout>
     },
     {
-      path: "products/:pId",
+      path: "/products/:pId",
       element: <Layout><ProductDetail /></Layout>
     },
     {

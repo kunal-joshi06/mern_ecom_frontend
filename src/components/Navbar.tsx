@@ -2,11 +2,10 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import MainNav from "./Navbar/MainNav";
 import { UserNav } from "./Navbar/UserNav";
 import { Button } from "./ui/button";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { setOpen } from "@/store/features/cart/cartSlice";
 
 function Navbar() {
-    const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const isLoggedIn = useAppSelector((state) => state.auth.user.isLoggedIn);
     const totalItems = useAppSelector(state => state.cart.totalItems);
@@ -24,7 +23,7 @@ function Navbar() {
                                 </svg>
                                 <span className="sr-only">bag</span>
                                 {totalItems > 0 ? <div className="absolute w-2 h-2 bg-red-500 rounded-full top-1.5 right-4"></div>
-                                : <></>}
+                                    : <></>}
                             </button>
                             {isLoggedIn ? <UserNav /> : <Button variant={"secondary"}><Link to="/login">Login</Link></Button>}
                         </div>

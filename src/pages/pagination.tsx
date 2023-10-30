@@ -35,7 +35,7 @@ function PaginationComponent() {
           <div className="flex flex-1 justify-between sm:hidden">
             <div
               onClick={handlePrev}
-              className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+              className="cursor-pointer relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
             >
               Previous
             </div>
@@ -44,7 +44,7 @@ function PaginationComponent() {
             ) : (
               <div
                 onClick={handleNext}
-                className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                className="cursor-pointer relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
               >
                 Next
               </div>
@@ -71,7 +71,7 @@ function PaginationComponent() {
 
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map((val) => (
                   <div
-                    onClick={() => dispatch(setPage(val))} // Use dispatch to set the new page
+                    onClick={() => dispatch(setPage(val))}
                     key={val}
                     aria-current="page"
                     className={

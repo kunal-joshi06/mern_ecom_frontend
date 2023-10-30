@@ -1,12 +1,12 @@
 // import HomeSlider from '../components/homeSlider';
 import { useAppDispatch, useAppSelector } from "../store/hooks"
-import ProductCardVertical from "./productPages/ProductCardVertical";
 import HomeSlider from "../components/homeSlider";
 import { ProductType } from "../store/features/products/productType";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { getAllProductsAsync } from "../store/features/products/productSlice";
 import { Button } from "@/components/ui/button";
+import ProductHomeCard from "./productPages/ProductHomeCard";
 
 const Home = () => {
 
@@ -24,13 +24,16 @@ const Home = () => {
       <div className="bg-white">
         <div className="container mx-auto max-full px-4 py-12 sm:px-6 sm:py-18">
           <h2 className="text-2xl font-bold tracking-tight text-gray-900">Our top products</h2>
-          <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-            {products.map((product: ProductType) => (<ProductCardVertical key={product._id} {...product} />))}
+          <div className="container mx-auto p-4 lg:h-screen flex items-center justify-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+              {products.map((product: ProductType) => (<ProductHomeCard {...product} />))}
+            </div>
           </div>
+
         </div>
       </div>
       <div className="flex justify-center items-center w-full pb-10">
-        <Button variant={"secondary"}>   
+        <Button variant={"secondary"}>
           <Link to="/products">
             More Products
           </Link>
@@ -39,8 +42,7 @@ const Home = () => {
     </main>
   )
 }
-//
-// toast.error("Login Failed");
+
 export default Home
 
 

@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils"
 import { Toggle } from "@/components/ui/toggle"
-import { useAppDispatch } from "../../store/hooks"
+import { useAppDispatch, useAppSelector } from "../../store/hooks"
 import { getAllProductsAsync } from '../../store/features/products/productSlice';
 import { useEffect, useState } from "react";
 
@@ -19,19 +19,21 @@ export default function Sidebar(className: React.HTMLAttributes<HTMLDivElement>)
     ]
     const dispatch = useAppDispatch();
     const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
-
+    const { page, limit } = useAppSelector((store) => store.products);
     useEffect(() => {
         const queryParams: {
             page?: string;
             filterBy?: string[];
             limit?: string
         } = {
+            page: page.toString(),
             filterBy: selectedCategory,
+            limit: limit.toString()
         };
 
         dispatch(getAllProductsAsync(queryParams))
 
-    }, [dispatch, selectedCategory])
+    }, [dispatch, limit, page, selectedCategory])
 
     const handleCategoryFilter = (category: string) => {
         setSelectedCategory((prevSelectedCategories) => [...prevSelectedCategories, category]);
