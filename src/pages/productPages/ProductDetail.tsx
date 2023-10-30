@@ -7,6 +7,9 @@ import BreadCrumb from "../../components/ProductDetails/BreadCrumb"
 import { ProductType } from "../../store/features/products/productType"
 import { addItemToCart } from "../../store/features/cart/cartSlice"
 import toast from "react-hot-toast"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { Button } from "@/components/ui/button"
+import { currency } from '../../components/currency';
 
 
 const ProductDetail = () => {
@@ -66,13 +69,13 @@ const ProductDetail = () => {
                         <p className="leading-relaxed">{currentProduct.description}</p>
 
                         <div className="flex mt-5">
-                            <span className="title-font font-medium text-2xl text-gray-900">Rs.{currentProduct.price}</span>
-                            <button className="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded"
+                            <span className="title-font font-normal text-2xl align-self-end text-gray-900">Price:&nbsp;{currency(currentProduct.price)}</span>
+                            <Button className="flex ml-auto  py-2 px-6 "
                                 onClick={() => handleAddToCart(currentProduct)}
-                            >Add to Cart</button>
+                            >Add to Cart</Button>
                         </div>
 
-                        {currentProduct.reviews && <div className="rounded-lg border-2 border-solid border-gray-200 p-6 text-xs mt-8 mx-4 sm:mx-0 bg-white ">
+                        {currentProduct.reviews && <ScrollArea className="rounded-lg border border-solid border-gray-200 p-6 text-xs mt-8 mx-4 sm:mx-0 bg-white ">
                             <div>
                                 <div className="flex flex-col px-5">
                                     {currentProduct.reviews.length > 0 ? <h1 className="text-gray-800 text-xl font-medium mb-2">Customer Rating</h1> :
@@ -80,7 +83,7 @@ const ProductDetail = () => {
                                 </div>
                                 <div className="max-h-60 overflow-y-scroll no-scrollbar px-6 pb-6">
                                     {currentProduct.reviews.map((review, index: number) => (
-                                        <div key={index} className="border-gray-200 card-shadow p-4 mt-5">
+                                        <div key={index} className="border-gray-200 review-shadow p-4 mt-5">
                                             <div>
                                                 <div className="flex justify-between items-center">
                                                     {review.rating && <StarRating rating={review?.rating} />}
@@ -101,7 +104,7 @@ const ProductDetail = () => {
                                     ))}
                                 </div>
                             </div>
-                        </div>}
+                        </ScrollArea>}
 
                     </div>
                 </div>

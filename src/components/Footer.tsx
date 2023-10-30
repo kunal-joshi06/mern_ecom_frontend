@@ -1,8 +1,8 @@
 function Footer() {
   return (
-    <footer className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white py-8">
+    <footer className="bg-gradient-to-b from-zinc-900 to-zinc-950 text-white py-8">
       <div className="container px-6 mx-auto">
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 place-items-center">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 ">
           <div className="md:col-span-2 lg:col-span-1">
             <h2 className="text-2xl font-bold mb-4">Company Name</h2>
             <p className="md:pr-12 ">

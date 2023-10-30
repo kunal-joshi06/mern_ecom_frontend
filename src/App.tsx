@@ -8,7 +8,6 @@ import ProductDetail from "./pages/productPages/ProductDetail";
 import AllProducts from "./pages/productPages/AllProducts"
 import PaymentCancel from "./pages/payments/paymentFailed"
 import PaymentSuccess from "./pages/payments/PaymentSuccess"
-import CardLogin from "./pages/CardLogin"
 
 
 function App() {
@@ -43,11 +42,6 @@ function App() {
       path: "/payment-cancel",
       element: <PaymentCancel />
     },
-    {
-      path: "/temp",
-      element: <CardLogin />
-    }
-
   ])
 
   return (<>
