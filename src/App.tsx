@@ -41,8 +41,7 @@ function App() {
     {
       path: "/payment-cancel",
       element: <PaymentCancel />
-    }
-
+    },
   ])
 
   return (<>

@@ -6,6 +6,7 @@ import { ProductType } from "../store/features/products/productType";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { getAllProductsAsync } from "../store/features/products/productSlice";
+import { Button } from "@/components/ui/button";
 
 const Home = () => {
 
@@ -29,9 +30,11 @@ const Home = () => {
         </div>
       </div>
       <div className="flex justify-center items-center w-full pb-10">
-        <Link to="/products" className="mt-2 px-4 py-2 bg-slate-100 font-semibold text-slate-700 rounded hover:bg-slate-3 00">
-          More Products
-        </Link>
+        <Button variant={"secondary"}>   
+          <Link to="/products">
+            More Products
+          </Link>
+        </Button>
       </div>
     </main>
   )

@@ -1,15 +1,14 @@
 import { useEffect } from 'react'
-import ProductCardHorizontal from "./ProductCardHorizontal";
-import { useAppDispatch, useAppSelector } from "../../store/hooks"
-import { ProductType } from '../../store/features/products/productType';
-import { getAllProductsAsync } from '../../store/features/products/productSlice';
-import Pagination from '../pagination';
-import Sidebar from './Sidebar';
+import ProductCardHorizontal from "./productPages/ProductCardHorizontal";
+import { useAppDispatch, useAppSelector } from "../store/hooks"
+import { ProductType } from '../store/features/products/productType';
+import { getAllProductsAsync } from '../store/features/products/productSlice';
+import Pagination from './pagination';
+import Sidebar from './productPages/Sidebar';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
 
-
-function AllProducts() {
+function Temp() {
     const dispatch = useAppDispatch();
     const { products, page, limit } = useAppSelector((store) => store.products);
     useEffect(() => {
@@ -54,4 +53,4 @@ function AllProducts() {
   )
 }
 
-export default AllProducts
+export default Temp
