@@ -3,7 +3,7 @@ import { Toggle } from "@/components/ui/toggle"
 import { useAppDispatch } from "../../store/hooks"
 import { removeCategory, setCategory } from '../../store/features/products/productSlice';
 
-export default function Sidebar(className: React.HTMLAttributes<HTMLDivElement>) {
+export default function Sidebar({className}:React.HTMLAttributes<HTMLDivElement>) {
     const filters = [
         {
             id: 'category',

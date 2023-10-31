@@ -4,12 +4,11 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 import { decreaseQuantity, increaseQuantity, removeItemFromCart, setClose } from '../store/features/cart/cartSlice'
 import { Link } from 'react-router-dom'
-import { loadStripe } from '@stripe/stripe-js';
-import { createCheckout } from '../store/features/cart/cartApi'
+import { Button } from './ui/button'
+
 
 
 export default function Cart() {
-    const stripeKey = import.meta.env.VITE_STRIPE_KEY;
     const dispatch = useAppDispatch()
     const isCartOpen = useAppSelector(state => state.cart.openState)
     const isLoggedIn = useAppSelector(state => state.auth.user.isLoggedIn)
@@ -34,22 +33,7 @@ export default function Cart() {
         dispatch(decreaseQuantity(id))
     }
 
-    const handlePayment = async () => {
-        const stripe = await loadStripe(stripeKey);
-
-        try {
-            const response = await createCheckout(products);
-            const result = await stripe?.redirectToCheckout({
-                sessionId: response.data.id,
-            });
-
-            if (result?.error) {
-                console.log(result.error);
-            }
-        } catch (error) {
-            console.error(error);
-        }
-    };
+  
 
     return (
         <Transition.Root show={isCartOpen} as={Fragment}>
@@ -78,9 +62,10 @@ export default function Cart() {
                                 leaveFrom="translate-x-0"
                                 leaveTo="translate-x-full"
                             >
-                                <Dialog.Panel className="pointer-events-auto w-screen max-w-md">
+                                <Dialog.Panel className="pointer-events-auto h-screen w-screen max-w-md">
                                     <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
-                                        <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
+                                        <div className={isLoggedIn ? "flex-1 overflow-y-auto px-4 py-6 sm:px-6 no-scrollbar"
+                                                        : "flex-1 overflow-hidden px-4 py-6 sm:px-6"}>
                                             <div className="flex items-start justify-between">
                                                 <Dialog.Title className="text-lg font-medium text-gray-900">Shopping cart</Dialog.Title>
                                                 <div className="ml-3 flex h-7 items-center">
@@ -97,7 +82,7 @@ export default function Cart() {
                                             </div>
 
                                             {products.length < 1 && isLoggedIn && (
-                                                <h3 className="mt-8 text-lg font-bold text-gray-900">Your Cart is Empty. Add items in the cart to view.</h3>
+                                                <h3 className="mt-8 text-md font-medium text-gray-900">Your Cart is Empty. Add items in the cart to view.</h3>
                                             )}
 
 
@@ -144,10 +129,17 @@ export default function Cart() {
                                                     </div>
                                                 </div>
                                             ) : (
-                                                <>
-                                                    <h3 className="mt-8 text-lg font-medium text-gray-900">Please login to view your cart.</h3>
-                                                    <Link className="border-2 border-gray-50" to="/login">Login</Link>
-                                                </>
+                                                <div className='flex py-8 h-full w-full flex-col overflow-hidden justify-between'>  
+                                                <div className='flex flex-row justify-between items-baseline'>
+                                                    <h3 className="text-md font-medium text-gray-900">Please login to view your cart.</h3>
+                                                    <Button variant={"secondary"}><Link to="/login">Login</Link></Button>  
+                                                </div>
+                                                <div className='flex flex-row justify-between items-end'>
+                                                    <h3 className="text-md font-medium text-gray-900">Don't have an account?</h3>
+                                                    <Button><Link to="/register">Create Account</Link></Button>  
+                                                </div>
+
+                                                </div>
                                             )}
                                         </div>
 
@@ -160,12 +152,7 @@ export default function Cart() {
                                                 </div>
                                                 <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                                                 <div className="mt-6">
-                                                    <button
-                                                        onClick={handlePayment}
-                                                        className="cursor-pointer flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover-bg-indigo-700"
-                                                    >
-                                                        Checkout
-                                                    </button>
+                                                    <Button><Link to='/checkout'>Checkout</Link></Button>
                                                 </div>
                                             </div>
                                         )}
