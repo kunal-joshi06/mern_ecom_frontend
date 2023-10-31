@@ -27,7 +27,8 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks"
 import { loadStripe } from "@stripe/stripe-js"
 import { createCheckout } from "@/store/features/cart/cartApi"
 import { ArrowLeftCircle } from "lucide-react"
-import { saveShippingInfo } from "@/store/features/user/userSlice";
+import { saveShippingInfo, setOrderId } from "@/store/features/cart/cartSlice";
+
 
 
 export default function Checkout() {
@@ -42,10 +43,10 @@ export default function Checkout() {
 
         try {
             const response = await createCheckout(products);
+            dispatch(setOrderId(response.data.id))
             const result = await stripe?.redirectToCheckout({
                 sessionId: response.data.id,
             });
-
             if (result?.error) {
                 console.log(result.error);
             }
@@ -57,19 +58,19 @@ export default function Checkout() {
     const addressSchema = z.object({
         name: z.string({ required_error: "Name is required", }).min(2).max(50),
         address: z.string({ required_error: "Address is required", }).min(2),
-        phone: z.string({ required_error: "Phone number is required", }).min(10).max(10),
-        state: z.string({ required_error: "Please select your state", }),
-        city: z.string({ required_error: "Please select your city", }),
-        pincode: z.string({ required_error: "Pincode is required", }),
+        phoneNo: z.string({ required_error: "Phone number is required", }).min(10).max(10),
+        city: z.string({ required_error: "Please select your state", }),
+        country: z.string({ required_error: "Please select your country", }),
+        pinCode: z.string({ required_error: "Pincode is required", }),
     })
 
     const addressForm = useForm<z.infer<typeof addressSchema>>({
         resolver: zodResolver(addressSchema),
     })
 
-    function onAddressSubmit(values: z.infer<typeof addressSchema>) {
+    async function onAddressSubmit(values: z.infer<typeof addressSchema>) {
+        await dispatch(saveShippingInfo(values))
         handlePayment()
-        dispatch(saveShippingInfo(values))
     }
     const navigate = useNavigate();
     const goBack = () => {
@@ -132,14 +133,14 @@ export default function Checkout() {
                                         <div className="grid gap-2">
                                             <FormField
                                                 control={addressForm.control}
-                                                name="state"
+                                                name="city"
                                                 render={({ field }) => (
                                                     <FormItem>
-                                                        <FormLabel>State</FormLabel>
+                                                        <FormLabel>City</FormLabel>
                                                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                                                             <FormControl>
                                                                 <SelectTrigger>
-                                                                    <SelectValue placeholder="Select your state" />
+                                                                    <SelectValue placeholder="Select your City" />
                                                                 </SelectTrigger>
                                                             </FormControl>
                                                             <SelectContent>
@@ -156,20 +157,20 @@ export default function Checkout() {
                                         <div className="grid gap-2">
                                             <FormField
                                                 control={addressForm.control}
-                                                name="city"
+                                                name="country"
                                                 render={({ field }) => (
                                                     <FormItem>
-                                                        <FormLabel>City</FormLabel>
+                                                        <FormLabel>Country</FormLabel>
                                                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                                                             <FormControl>
                                                                 <SelectTrigger>
-                                                                    <SelectValue placeholder="Select your city" />
+                                                                    <SelectValue placeholder="Select your Country" />
                                                                 </SelectTrigger>
                                                             </FormControl>
                                                             <SelectContent>
-                                                                <SelectItem value="gurugram">Gurugram</SelectItem>
-                                                                <SelectItem value="newdelhi">New delhi</SelectItem>
-                                                                <SelectItem value="Ambala">ambala</SelectItem>
+                                                                <SelectItem value="india">India</SelectItem>
+                                                                <SelectItem value="us">United States</SelectItem>
+                                                                <SelectItem value="england">England</SelectItem>
                                                             </SelectContent>
                                                         </Select>
                                                         <FormMessage />
@@ -182,7 +183,7 @@ export default function Checkout() {
                                         <div className="grid gap-2">
                                             <FormField
                                                 control={addressForm.control}
-                                                name="phone"
+                                                name="phoneNo"
                                                 render={({ field }) => (
                                                     <FormItem>
                                                         <FormLabel>Phone</FormLabel>
@@ -199,7 +200,7 @@ export default function Checkout() {
                                         <div className="grid gap-2">
                                             <FormField
                                                 control={addressForm.control}
-                                                name="pincode"
+                                                name="pinCode"
                                                 render={({ field }) => (
                                                     <FormItem>
                                                         <FormLabel>Pin Code</FormLabel>

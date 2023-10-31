@@ -8,6 +8,15 @@ export interface CartState {
   cartItems: ProductType[];
   totalItems: number;
   cartTotal: number;
+  shippingInfo: {
+    address: string | null;
+    city: string | null;
+    state: string | null;
+    country: string | null;
+    pinCode: number | null;
+    phoneNo: number | null;
+  };
+  orderId: string | null;
 }
 
 const initialState: CartState = {
@@ -15,12 +24,24 @@ const initialState: CartState = {
   cartItems: [],
   totalItems: 0,
   cartTotal: 0,
+  shippingInfo: {
+    address: null,
+    city: null,
+    state: null,
+    country: null,
+    pinCode: null,
+    phoneNo: null,
+  },
+  orderId: null,
 };
 
 export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
+    setOrderId: (state, action) => {
+      state.orderId = action.payload;
+    },
     setOpen: (state) => {
       state.openState = true;
     },
@@ -125,6 +146,9 @@ export const cartSlice = createSlice({
         }, 0);
       }
     },
+    saveShippingInfo: (state, action) => {
+      state.shippingInfo = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(logoutUserAsync.fulfilled, (state) => {
@@ -142,6 +166,8 @@ export const {
   removeItemFromCart,
   decreaseQuantity,
   increaseQuantity,
+  saveShippingInfo,
+  setOrderId,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

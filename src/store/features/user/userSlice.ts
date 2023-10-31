@@ -41,14 +41,6 @@ export interface userState {
     id: string | null;
     isLoggedIn: boolean | null;
     token: string | null;
-    shippingInfo: {
-      address: string | null;
-      city: string | null;
-      state: string | null;
-      country: string | null;
-      pinCode: number | null;
-      phoneNo: number | null;
-    };
   };
   loading: "idle" | "pending" | "succeeded" | "failed";
 }
@@ -60,14 +52,6 @@ const initialState: userState = {
     id: null,
     isLoggedIn: null,
     token: null,
-    shippingInfo: {
-      address: null,
-      city: null,
-      state: null,
-      country: null,
-      pinCode: null,
-      phoneNo: null,
-    },
   },
   loading: "idle",
 };
@@ -75,11 +59,7 @@ const initialState: userState = {
 export const authSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {
-    saveShippingInfo: (state, action) => {
-      state.user.shippingInfo = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(registerUserAsync.pending, (state) => {
@@ -114,6 +94,7 @@ export const authSlice = createSlice({
       })
       .addCase(createNewOrderAsync.fulfilled, (state) => {
         state.loading = "succeeded";
+        toast.success("Order Created Successfully");
       })
       .addCase(createNewOrderAsync.rejected, (state) => {
         state.loading = "failed";
@@ -122,5 +103,4 @@ export const authSlice = createSlice({
 });
 
 export { registerUserAsync, updatePasswordAsync, createNewOrderAsync };
-export const { saveShippingInfo } = authSlice.actions;
 export default authSlice.reducer;

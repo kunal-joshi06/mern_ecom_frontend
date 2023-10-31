@@ -32,8 +32,10 @@ export type CreateNewOrder = {
   };
   orderItems: ProductType[];
   paymentInfo: {
+    id: string | null;
     status: string | null;
     totalPrice: number | null;
+    paidAt: Date;
   };
   orderStatus: string | null;
 };

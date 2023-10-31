@@ -40,7 +40,13 @@ export const updatePassword = async (data: UpdatePasswordRequest) => {
 
 export const createOrder = async (data: CreateNewOrder) => {
   try {
-    const response = await axios.post(`${apiUrl}/order/new`, data);
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    };
+    const response = await axios.post(`${apiUrl}/order/new`, data, config);
     return response;
   } catch (error) {
     console.log(error);
