@@ -65,19 +65,19 @@ export default function Checkout() {
     })
 
     function onAddressSubmit(values: z.infer<typeof addressSchema>) {
-        handlePayment
+        handlePayment()
         console.log(values)
     }
     const navigate = useNavigate();
     const goBack = () => {
-        navigate(-1); // This navigates back to the previous page
+        navigate(-1);
     };
 
     return (
         <div className="h-screen min:w-full flex flex-col p-8 justify-between">
             <div className="flex px-4 items-center justify-between lg:justify-start">
                 <Button variant={"ghost"} onClick={goBack}><ArrowLeftCircle /></Button>
-             <h1 className="text-2xl font-semibold text-center lg:text-left">Checkout</h1>
+                <h1 className="text-2xl font-semibold text-center lg:text-left">Checkout</h1>
             </div>
             <div className="container lg:overflow-hidden lg:h-full min:w-full flex flex-col lg:flex-row p-8 justify-between items-center">
                 <Card className="h-full w-full lg:w-2/4">
@@ -217,38 +217,38 @@ export default function Checkout() {
                 </Card>
                 <div className="h-full w-full lg:w-8/12 border lg:border-0 rounded-sm p-4 mt-4 lg:mt-0 lg:px-4 grid">
                     <ScrollArea>
-                                {products.map((product) => (
-                                    <li key={product._id} className="flex border rounded-sm p-6 mb-2 duration-300 hover:bg-gray-50">
-                                        <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                            {product.imageUrl && <img
-                                                src={product.imageUrl}
-                                                alt="alt-image"
-                                                className="h-full w-full object-cover object-center"
-                                            />}
+                        {products.map((product) => (
+                            <li key={product._id} className="flex border rounded-sm p-6 mb-2 duration-300 hover:bg-gray-50">
+                                <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                                    {product.imageUrl && <img
+                                        src={product.imageUrl}
+                                        alt="alt-image"
+                                        className="h-full w-full object-cover object-center"
+                                    />}
+                                </div>
+                                <div className="ml-4 flex flex-1 flex-col">
+                                    <div>
+                                        <div className="flex justify-between text-base font-medium text-gray-900">
+                                            <h3>
+                                                <p>{product.name}</p>
+                                            </h3>
+                                            <p className="ml-4 font-normal">Rs. {product.price}</p>
                                         </div>
-                                        <div className="ml-4 flex flex-1 flex-col">
-                                            <div>
-                                                <div className="flex justify-between text-base font-medium text-gray-900">
-                                                    <h3>
-                                                        <p>{product.name}</p>
-                                                    </h3>
-                                                    <p className="ml-4 font-normal">Rs. {product.price}</p>
-                                                </div>
-                                                <p className="mt-1 text-sm text-gray-500">Rating : {Math.round(product.rating!)}</p>
-                                            </div>
-                                            <div className="flex flex-1 items-end justify-between text-sm">
-                                                <p className="text-gray-500"><span className='flex'>Qty :<span className='font-bold'>{product.quantity} </span></span></p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                ))}
- 
+                                        <p className="mt-1 text-sm text-gray-500">Rating : {Math.round(product.rating!)}</p>
+                                    </div>
+                                    <div className="flex flex-1 items-end justify-between text-sm">
+                                        <p className="text-gray-500"><span className='flex'>Qty :<span className='font-bold'>{product.quantity} </span></span></p>
+                                    </div>
+                                </div>
+                            </li>
+                        ))}
+
                     </ScrollArea>
                 </div>
             </div>
             <div className="w-full py-4 lg:py-0 lg:px-12 flex-row flex justify-between">
-            <h1 className="text-xl font-normal">Total : ₹{cartTotal}</h1>
-            <Button onClick={addressForm.handleSubmit(onAddressSubmit)} type="submit">Proceed Payment</Button>
+                <h1 className="text-xl font-normal">Total : ₹{cartTotal}</h1>
+                <Button onClick={addressForm.handleSubmit(onAddressSubmit)} type="submit">Proceed Payment</Button>
             </div>
         </div>
     )

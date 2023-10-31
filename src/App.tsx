@@ -7,9 +7,9 @@ import { Toaster } from 'react-hot-toast';
 import ProductDetail from "./pages/productPages/ProductDetail";
 import PaymentCancel from "./pages/payments/paymentFailed"
 import PaymentSuccess from "./pages/payments/PaymentSuccess"
-import AllProducts from "./pages/productPages/AllProducts"
 import AccountSettings from "./pages/AccountSettings"
 import Checkout from "./pages/Checkout"
+import AllProducts from "./pages/productPages/Products"
 
 
 function App() {
