@@ -38,6 +38,7 @@ export interface productState {
   products: ProductType[];
   filterByCategory: string[];
   limit: number;
+  filterOpen:boolean;
   loading: "idle" | "pending" | "succeeded" | "failed";
   currentProduct: ProductType;
 }
@@ -46,6 +47,7 @@ const initialState: productState = {
   page: 1,
   totalProducts: 0,
   limit: 8,
+  filterOpen: false,
   filterByCategory: [],
   products: [],
   currentProduct: {
@@ -81,6 +83,12 @@ export const productSlice = createSlice({
     setCategory: (state, action) => {
       state.filterByCategory.push(action.payload);
       state.page = 1;
+    },
+    setFilterOpen: (state) => {
+      state.filterOpen = true;
+    },
+    setFilterClose: (state) => {
+      state.filterOpen = false;
     },
     removeCategory: (state, action) => {
       const categoryToRemove = action.payload;
@@ -121,6 +129,6 @@ export const productSlice = createSlice({
   },
 });
 
-export const { setPage, setCategory, removeCategory } = productSlice.actions;
+export const { setPage, setCategory, removeCategory,setFilterClose,setFilterOpen } = productSlice.actions;
 export { getAllProductsAsync, getProductDetailsAsync };
 export default productSlice.reducer;

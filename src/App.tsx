@@ -9,6 +9,7 @@ import PaymentCancel from "./pages/payments/paymentFailed"
 import PaymentSuccess from "./pages/payments/PaymentSuccess"
 import AllProducts from "./pages/productPages/AllProducts"
 import AccountSettings from "./pages/AccountSettings"
+import Checkout from "./pages/Checkout"
 
 
 function App() {
@@ -44,6 +45,10 @@ function App() {
     {
       path: "/account-settings",
       element: <Layout><AccountSettings /></Layout>
+    },
+    {
+      path: "/checkout",
+      element: <Checkout />
     }
   ])
 
