@@ -1,5 +1,6 @@
 import axios from "axios";
 import {
+  CreateNewOrder,
   RegisterRequest,
   RegisterResponse,
   UpdatePasswordRequest,
@@ -30,6 +31,16 @@ export const updatePassword = async (data: UpdatePasswordRequest) => {
       withCredentials: true,
     };
     const response = await axios.put(`${apiUrl}/password/update`, data, config);
+    return response;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+export const createOrder = async (data: CreateNewOrder) => {
+  try {
+    const response = await axios.post(`${apiUrl}/order/new`, data);
     return response;
   } catch (error) {
     console.log(error);

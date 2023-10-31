@@ -23,13 +23,16 @@ import { useForm } from "react-hook-form"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { useAppSelector } from "@/store/hooks"
+import { useAppDispatch, useAppSelector } from "@/store/hooks"
 import { loadStripe } from "@stripe/stripe-js"
 import { createCheckout } from "@/store/features/cart/cartApi"
 import { ArrowLeftCircle } from "lucide-react"
+import { saveShippingInfo } from "@/store/features/user/userSlice";
 
 
 export default function Checkout() {
+
+    const dispatch = useAppDispatch();
     const products = useAppSelector(state => state.cart.cartItems);
     const cartTotal = useAppSelector(state => state.cart.cartTotal);
     const stripeKey = import.meta.env.VITE_STRIPE_KEY;
@@ -66,7 +69,7 @@ export default function Checkout() {
 
     function onAddressSubmit(values: z.infer<typeof addressSchema>) {
         handlePayment()
-        console.log(values)
+        dispatch(saveShippingInfo(values))
     }
     const navigate = useNavigate();
     const goBack = () => {

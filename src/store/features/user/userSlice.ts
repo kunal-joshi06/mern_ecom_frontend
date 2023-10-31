@@ -1,6 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { registerUser, updatePassword } from "./userApi";
-import { RegisterRequest, UpdatePasswordRequest } from "./userTypes";
+import { createOrder, registerUser, updatePassword } from "./userApi";
+import {
+  CreateNewOrder,
+  RegisterRequest,
+  UpdatePasswordRequest,
+} from "./userTypes";
 import toast from "react-hot-toast";
 
 const registerUserAsync = createAsyncThunk(
@@ -21,6 +25,15 @@ const updatePasswordAsync = createAsyncThunk(
   }
 );
 
+const createNewOrderAsync = createAsyncThunk(
+  "user/createOrder",
+  async (data: CreateNewOrder) => {
+    const response = await createOrder(data);
+    console.log(response);
+    return response.data;
+  }
+);
+
 export interface userState {
   user: {
     name: string | null;
@@ -28,6 +41,14 @@ export interface userState {
     id: string | null;
     isLoggedIn: boolean | null;
     token: string | null;
+    shippingInfo: {
+      address: string | null;
+      city: string | null;
+      state: string | null;
+      country: string | null;
+      pinCode: number | null;
+      phoneNo: number | null;
+    };
   };
   loading: "idle" | "pending" | "succeeded" | "failed";
 }
@@ -39,6 +60,14 @@ const initialState: userState = {
     id: null,
     isLoggedIn: null,
     token: null,
+    shippingInfo: {
+      address: null,
+      city: null,
+      state: null,
+      country: null,
+      pinCode: null,
+      phoneNo: null,
+    },
   },
   loading: "idle",
 };
@@ -46,7 +75,11 @@ const initialState: userState = {
 export const authSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    saveShippingInfo: (state, action) => {
+      state.user.shippingInfo = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(registerUserAsync.pending, (state) => {
@@ -75,10 +108,19 @@ export const authSlice = createSlice({
       .addCase(updatePasswordAsync.rejected, (state) => {
         state.loading = "failed";
         toast.error("Failed to change password");
+      })
+      .addCase(createNewOrderAsync.pending, (state) => {
+        state.loading = "pending";
+      })
+      .addCase(createNewOrderAsync.fulfilled, (state) => {
+        state.loading = "succeeded";
+      })
+      .addCase(createNewOrderAsync.rejected, (state) => {
+        state.loading = "failed";
       });
   },
 });
 
-export { registerUserAsync, updatePasswordAsync };
-
+export { registerUserAsync, updatePasswordAsync, createNewOrderAsync };
+export const { saveShippingInfo } = authSlice.actions;
 export default authSlice.reducer;
