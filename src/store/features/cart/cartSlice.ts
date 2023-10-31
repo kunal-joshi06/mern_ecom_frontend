@@ -155,6 +155,15 @@ export const cartSlice = createSlice({
       state.cartItems = [];
       state.totalItems = 0;
       state.cartTotal = 0;
+      state.orderId = null;
+      state.shippingInfo = {
+        address: null,
+        city: null,
+        state: null,
+        country: null,
+        pinCode: null,
+        phoneNo: null,
+      };
     });
   },
 });
