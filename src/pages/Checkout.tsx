@@ -16,7 +16,7 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import * as z from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -223,11 +223,11 @@ export default function Checkout() {
                     <ScrollArea>
                         {products.map((product) => (
                             <li key={product._id} className="flex border rounded-sm p-6 mb-2 duration-300 hover:bg-gray-50">
-                                <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                                <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md  mr-6">
                                     {product.imageUrl && <img
                                         src={product.imageUrl}
                                         alt="alt-image"
-                                        className="h-full w-full object-cover object-center"
+                                        className="h-full w-full object-contain object-center"
                                     />}
                                 </div>
                                 <div className="ml-4 flex flex-1 flex-col">
