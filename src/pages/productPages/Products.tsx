@@ -15,19 +15,23 @@ import FilterModal from '../../components/FilterModal'
 function AllProducts() {
   const dispatch = useAppDispatch();
   
-  const { products, page, limit, filterByCategory } = useAppSelector((store) => store.products);
+  const { products, page, limit, filterByCategory,minPrice,maxPrice } = useAppSelector((store) => store.products);
   useEffect(() => {
     const queryParams: {
       page?: string;
       filterBy?: string[];
-      limit?: string
+      limit?: string;
+      minPrice?: number;
+      maxPrice?: number;
     } = {
       page: page.toString(),
       limit: limit.toString(),
       filterBy: filterByCategory,
+      minPrice: minPrice,
+      maxPrice: maxPrice,
     };
     dispatch(getAllProductsAsync(queryParams))
-  }, [dispatch, page, limit, filterByCategory])
+  }, [dispatch, page, limit, filterByCategory, minPrice,maxPrice])
 
   return (
     <>
@@ -43,7 +47,7 @@ function AllProducts() {
             <div className="h-full px-4 py-6 lg:px-8">
               <ScrollArea className="bg-white h-screen no-scrollbar overflow-auto lg:col-span-3 ">
                 <div className="container mx-auto max-full">
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 place-items-center">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-6 place-items-center">
                     {products.map((product: ProductType, index: number) => (<ProductCardHorizontal key={index} {...product} />))}
                   </div>
                 </div>

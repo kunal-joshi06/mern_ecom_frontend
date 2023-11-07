@@ -6,11 +6,13 @@ export const getAllProducts = async (queryParams?: {
   sortBy?: string;
   filterBy?: string[];
   limit?: string;
+  minPrice?: number;
+  maxPrice?: number;
 }) => {
   try {
     let reqUrl = `${apiUrl}/products`;
     if (queryParams) {
-      const { page, sortBy, filterBy, limit } = queryParams;
+      const { page, sortBy, filterBy, limit, minPrice , maxPrice } = queryParams;
 
       const searchParams = new URLSearchParams();
 
@@ -20,6 +22,12 @@ export const getAllProducts = async (queryParams?: {
 
       if (sortBy) {
         searchParams.append("sortBy", sortBy);
+      }
+      if (minPrice) {
+        searchParams.append("minPrice", minPrice.toString());
+      }
+      if (maxPrice) {
+        searchParams.append("maxPrice", maxPrice.toString());
       }
 
       if (filterBy) {

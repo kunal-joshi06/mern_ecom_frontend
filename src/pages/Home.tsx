@@ -1,12 +1,13 @@
 // import HomeSlider from '../components/homeSlider';
 import { useAppDispatch, useAppSelector } from "../store/hooks"
-import HomeSlider from "../components/homeSlider";
 import { ProductType } from "../store/features/products/productType";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { getAllProductsAsync } from "../store/features/products/productSlice";
 import { Button } from "@/components/ui/button";
 import ProductHomeCard from "./productPages/ProductHomeCard";
+import EmblaCarousel from "@/components/Carousel/EmblaCarousel";
+import '../components/Carousel/embla.css'
 
 const Home = () => {
 
@@ -17,10 +18,10 @@ const Home = () => {
 
   const products = useAppSelector((store) => store.products.products);
   return (
-    <main>
-      <div className="h-96">
-        <HomeSlider />
-      </div>
+    <main className="w-100">
+      <section className="relative">
+        <EmblaCarousel />
+      </section>
       <div className="bg-white">
         <div className="container mx-auto max-full px-4 py-12 sm:px-6 sm:py-18">
           <h2 className="text-2xl font-bold tracking-tight text-gray-900">Our top products</h2>
@@ -32,7 +33,7 @@ const Home = () => {
         </div>
       </div>
       <div className="flex justify-center items-center w-full pb-10">
-        <Button variant={"secondary"}>
+        <Button className="sono">
           <Link to="/products">
             More Products
           </Link>

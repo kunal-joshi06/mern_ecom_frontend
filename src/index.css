@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;500;600;700;800&family=Quicksand:wght@300;400;500;600;700&family=Sono:wght@300;400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -69,9 +70,13 @@
 @layer base {
   * {
     @apply border-border;
+    html {
+    }
   }
   body {
     @apply bg-background text-foreground;
+    font-family: 'Sono', monospace, sans-serif !important;
+
   }
 }
 
@@ -92,4 +97,31 @@
 
 .review-shadow{
   box-shadow: 0 0 0 2px rgb(190, 190, 190), 8px 8px 0 0 rgb(191, 191, 191);
+}
+
+.cta{
+  background-color:  rgb(244 63 94) !important;
+  color: white;
+}
+
+.cta:hover{
+  background-color:  rgb(225 29 72) !important;
+}
+.cta-text{
+ color:  rgb(244 63 94) !important;
+}
+
+.cta-text:hover{
+ color:  rgb(225 29 72) !important;
+}
+
+.sono{
+  font-family: 'Sono', monospace, sans-serif !important;
+}
+.montserrat{
+  font-family: 'Montserrat', sans-serif !important;
+}
+.quicksand{
+  font-family: 'Quicksand', sans-serif !important;
+
 }
