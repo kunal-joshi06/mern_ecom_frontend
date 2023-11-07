@@ -10,6 +10,7 @@ import PaymentSuccess from "./pages/payments/PaymentSuccess"
 import AccountSettings from "./pages/AccountSettings"
 import Checkout from "./pages/Checkout"
 import AllProducts from "./pages/productPages/Products"
+import ErrorPage  from "./components/ErrorPage"
 
 
 function App() {
@@ -49,6 +50,9 @@ function App() {
     {
       path: "/checkout",
       element: <Checkout />
+    },
+    { path: "*",
+      element: <ErrorPage />
     }
   ])
 

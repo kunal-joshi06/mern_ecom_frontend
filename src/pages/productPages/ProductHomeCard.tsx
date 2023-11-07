@@ -2,8 +2,9 @@ import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/c
 import { Separator } from "@/components/ui/separator"
 import { ProductType } from "@/store/features/products/productType"
 import { Link } from "react-router-dom"
+import { currency } from '../../components/currency';
 
-const ProductHomeCard: React.FC<ProductType> = (product) => {
+const ProductHomeCard: React.FC<ProductType> = (product:ProductType) => {
     return (
         <Link to={`products/${product._id}`}>
             <Card className="duration-300 hover:scale-105 hover:shadow-lg">
@@ -12,9 +13,9 @@ const ProductHomeCard: React.FC<ProductType> = (product) => {
                 </div>
                 <Separator />
                     <CardContent className="p-4 text-center">
-                        <CardTitle className="text-lg uppercase font-medium dark:text-white text-gray-900">{product.name}</CardTitle>
+                        <CardTitle className="text-lg mb-1 uppercase font-medium dark:text-white text-gray-900">{product.name}</CardTitle>
                         <CardDescription className="mb-2">Category: {product.category}</CardDescription>
-                            <p className="mr-2 text-md  text-gray-900 dark:text-white">₹ {product.price}</p>
+                            <p className="mr-2 text-md font-bold text-gray-900 dark:text-white">{currency(product.price)}</p>
                     </CardContent>
             </Card>
         </Link>
@@ -22,5 +23,3 @@ const ProductHomeCard: React.FC<ProductType> = (product) => {
 }
 
 export default ProductHomeCard
-
-// className="mx-auto mt-11 w-80 transform overflow-hidden rounded-lg bg-white dark:bg-slate-800 shadow-md duration-300 hover:scale-105 hover:shadow-lg

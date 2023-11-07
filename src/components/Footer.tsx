@@ -1,49 +1,37 @@
+import { Slack } from "lucide-react";
+import { Link } from "react-router-dom";
+
 function Footer() {
   return (
-    <footer className="bg-gradient-to-b from-zinc-900 to-zinc-950 text-white py-8">
-      <div className="container px-6 mx-auto">
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 ">
-          <div className="md:col-span-2 lg:col-span-1">
-            <h2 className="text-2xl font-bold mb-4">Company Name</h2>
-            <p className="md:pr-12 ">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
-          </div>
-          <div className="lg:col-span-1">
-            <h3 className="text-xl font-semibold mb-3">Categories</h3>
-            <ul>
-              <li><a href="#">Category 1</a></li>
-              <li><a href="#">Category 2</a></li>
-              <li><a href="#">Category 3</a></li>
-              {/* Add more categories as needed */}
+   
+<footer className="bg-zinc-900 text-white sono">
+    <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
+        <div className="sm:flex sm:items-center sm:justify-between">
+            <Link to="/" className="flex items-center mb-4 sm:mb-0">
+               <Slack size={40} />
+                <span className="self-center text-2xl font-semibold whitespace-nowrap text-rose-500">&nbsp; Jainwin</span>
+            </Link>
+            <ul className="flex flex-wrap items-center mb-6 text-sm font-medium sm:mb-0 text-gray-400">
+                <li>
+                    <Link to="/" className="mr-4 hover:underline md:mr-6 ">About</Link>
+                </li>
+                <li>
+                    <Link to="/" className="mr-4 hover:underline md:mr-6">Privacy Policy</Link>
+                </li>
+                <li>
+                    <Link to="/" className="mr-4 hover:underline md:mr-6 ">Licensing</Link>
+                </li>
+                <li>
+                    <Link to="/" className="hover:underline">Contact</Link>
+                </li>
             </ul>
-          </div>
-          <div className="lg:col-span-1">
-            <h3 className="text-xl font-semibold mb-3">Information</h3>
-            <ul>
-              <li><a href="#">About Us</a></li>
-              <li><a href="#">Contact Us</a></li>
-              <li><a href="#">Privacy Policy</a></li>
-              <li><a href="#">Terms and Conditions</a></li>
-            </ul>
-          </div>
-          <div className="lg:col-span-1">
-            <h3 className="text-xl font-semibold mb-3">Connect</h3>
-            <ul>
-              <li><a href="#">Facebook</a></li>
-              <li><a href="#">Twitter</a></li>
-              <li><a href="#">Instagram</a></li>
-              {/* Add more social media links as needed */}
-            </ul>
-          </div>
         </div>
-        <div className="mt-8">
-          <p className="text-center">
-            &copy; {new Date().getFullYear()} Company Name. All rights reserved.
-          </p>
-        </div>
-      </div>
-    </footer>
+        <hr className="my-6  sm:mx-auto border-gray-700 lg:my-8" />
+        <span className="block text-sm  sm:text-center text-gray-400">© 2023 <a href="https://jainwin.com/" className="hover:underline">Jainwin™</a>. All Rights Reserved.</span>
+    </div>
+</footer>
+
+
   );
 }
 

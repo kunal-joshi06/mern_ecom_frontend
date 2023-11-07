@@ -69,8 +69,8 @@ const ProductDetail = () => {
                         <p className="leading-relaxed">{currentProduct.description}</p>
 
                         <div className="flex mt-5">
-                            <span className="title-font font-normal text-2xl align-self-end text-gray-900">Price:&nbsp;{currency(currentProduct.price)}</span>
-                            <Button className="flex ml-auto  py-2 px-6 "
+                            <span className="title-font font-normal text-2xl align-self-end text-gray-900">Price:&nbsp;{currency(currentProduct?.price)}</span>
+                            <Button className="flex ml-auto cta py-2 px-6 "
                                 onClick={() => handleAddToCart(currentProduct)}
                             >Add to Cart</Button>
                         </div>

@@ -16,7 +16,7 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as z from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -79,8 +79,8 @@ export default function Checkout() {
 
     return (
         <div className="h-screen min:w-full flex flex-col p-8 justify-between">
-            <div className="flex px-4 items-center justify-between lg:justify-start">
-                <Button variant={"ghost"} onClick={goBack}><ArrowLeftCircle /></Button>
+            <div className="flex space-x-2 items-center justify-between lg:justify-start">
+                <a href="javascript:void(0);" onClick={goBack}><ArrowLeftCircle /></a>
                 <h1 className="text-2xl font-semibold text-center lg:text-left">Checkout</h1>
             </div>
             <div className="container lg:overflow-hidden lg:h-full min:w-full flex flex-col lg:flex-row p-8 justify-between items-center">
@@ -252,7 +252,7 @@ export default function Checkout() {
             </div>
             <div className="w-full py-4 lg:py-0 lg:px-12 flex-row flex justify-between">
                 <h1 className="text-xl font-normal">Total : ₹{cartTotal}</h1>
-                <Button onClick={addressForm.handleSubmit(onAddressSubmit)} type="submit">Proceed Payment</Button>
+                <Button className="cta" onClick={addressForm.handleSubmit(onAddressSubmit)} type="submit">Proceed Payment</Button>
             </div>
         </div>
     )

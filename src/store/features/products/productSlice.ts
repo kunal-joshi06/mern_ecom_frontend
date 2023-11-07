@@ -10,6 +10,8 @@ const getAllProductsAsync = createAsyncThunk(
     sortBy?: string;
     filterBy?: string[];
     limit?: string;
+    minPrice?: number;
+    maxPrice?: number;
   }) => {
     try {
       const response = await getAllProducts(queryParams);
@@ -37,6 +39,8 @@ export interface productState {
   totalProducts: number;
   products: ProductType[];
   filterByCategory: string[];
+  minPrice: number;
+  maxPrice: number;
   limit: number;
   filterOpen:boolean;
   loading: "idle" | "pending" | "succeeded" | "failed";
@@ -49,6 +53,8 @@ const initialState: productState = {
   limit: 8,
   filterOpen: false,
   filterByCategory: [],
+  minPrice: 0,
+  maxPrice: 0,
   products: [],
   currentProduct: {
     _id: null,
@@ -84,11 +90,10 @@ export const productSlice = createSlice({
       state.filterByCategory.push(action.payload);
       state.page = 1;
     },
-    setFilterOpen: (state) => {
-      state.filterOpen = true;
-    },
-    setFilterClose: (state) => {
-      state.filterOpen = false;
+    setPriceRange: (state, action) => {
+      state.minPrice = action.payload[0];
+      state.maxPrice = action.payload[1];
+      state.page = 1;
     },
     removeCategory: (state, action) => {
       const categoryToRemove = action.payload;
@@ -96,6 +101,12 @@ export const productSlice = createSlice({
         (category) => category !== categoryToRemove
       );
       state.page = 1;
+    },
+    setFilterOpen: (state) => {
+      state.filterOpen = true;
+    },
+    setFilterClose: (state) => {
+      state.filterOpen = false;
     },
   },
   extraReducers: (builder) => {
@@ -129,6 +140,6 @@ export const productSlice = createSlice({
   },
 });
 
-export const { setPage, setCategory, removeCategory,setFilterClose,setFilterOpen } = productSlice.actions;
+export const { setPage, setCategory, removeCategory,setFilterClose,setFilterOpen,setPriceRange } = productSlice.actions;
 export { getAllProductsAsync, getProductDetailsAsync };
 export default productSlice.reducer;

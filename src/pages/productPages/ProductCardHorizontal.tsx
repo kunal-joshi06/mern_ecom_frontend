@@ -6,7 +6,7 @@ import { currency } from "@/components/currency";
 
 const ProductCardHorizontal = (product: ProductType) => {
     return (
-        <Card className="w-full h-full p-4 flex flex-row justify-between">
+        <Card className="w-full h-full rounded-sm shadow-md border border-gray-100 p-4 flex flex-row justify-between">
             <div className="w-40 h-full flex justify-center items-center">
                 {product.imageUrl && (
                     <img className="object-cover w-full h-full" src={product?.imageUrl} alt="product image" />

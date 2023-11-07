@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '../store/hooks'
 import { decreaseQuantity, increaseQuantity, removeItemFromCart, setClose } from '../store/features/cart/cartSlice'
 import { Link } from 'react-router-dom'
 import { Button } from './ui/button'
+import { MinusSquare,  PlusSquare } from 'lucide-react'
 
 
 
@@ -33,7 +34,7 @@ export default function Cart() {
         dispatch(decreaseQuantity(id))
     }
 
-  
+
 
     return (
         <Transition.Root show={isCartOpen} as={Fragment}>
@@ -65,9 +66,9 @@ export default function Cart() {
                                 <Dialog.Panel className="pointer-events-auto h-screen w-screen max-w-md">
                                     <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
                                         <div className={isLoggedIn ? "flex-1 overflow-y-auto px-4 py-6 sm:px-6 no-scrollbar"
-                                                        : "flex-1 overflow-hidden px-4 py-6 sm:px-6"}>
+                                            : "flex-1 overflow-hidden px-4 py-6 sm:px-6"}>
                                             <div className="flex items-start justify-between">
-                                                <Dialog.Title className="text-lg font-medium text-gray-900">Shopping cart</Dialog.Title>
+                                                <Dialog.Title className="text-lg font-semibold text-gray-900">Shopping cart</Dialog.Title>
                                                 <div className="ml-3 flex h-7 items-center">
                                                     <button
                                                         type="button"
@@ -111,12 +112,18 @@ export default function Cart() {
                                                                             <p className="mt-1 text-sm text-gray-500">Rating : {Math.round(product.rating!)}</p>
                                                                         </div>
                                                                         <div className="flex flex-1 items-end justify-between text-sm">
-                                                                            <p className="text-gray-500"><span className='flex'>Qty : <button className=' mx-1 border-slate-300 border-2 w-4' onClick={() => handleIncreaseQty(product._id!)}>+</button><span className='font-bold'>{product.quantity} </span><button className='mx-1 border-slate-300 border-2 w-4' onClick={() => handleDecreaseQty(product._id!)}>-</button></span></p>
+                                                                            <p className="text-gray-500 text-center">
+                                                                                <span className='flex items-center space-x-1'> Qty : &nbsp;
+                                                                                <a href='javascript:void(0);' onClick={() => handleDecreaseQty(product._id!)}> <MinusSquare className='hover:text-black transition-colors duration-100' size={16} strokeWidth={1.5}/></a>
+                                                                                    <span className='font-bold'>{product.quantity} </span>
+                                                                                    <a href='javascript:void(0);' onClick={() => handleIncreaseQty(product._id!)}> <PlusSquare className='hover:text-black transition-colors duration-100' size={16} strokeWidth={1.5}/></a>  
+                                                                                </span>
+                                                                            </p>
                                                                             <div className="flex">
                                                                                 <button
                                                                                     onClick={() => handleRemoveItem(product._id!)}
                                                                                     type="button"
-                                                                                    className="font-medium text-indigo-600 hover:text-indigo-500"
+                                                                                    className="font-medium cta-text"
                                                                                 >
                                                                                     Remove
                                                                                 </button>
@@ -129,15 +136,15 @@ export default function Cart() {
                                                     </div>
                                                 </div>
                                             ) : (
-                                                <div className='flex py-8 h-full w-full flex-col overflow-hidden justify-between'>  
-                                                <div className='flex flex-row justify-between items-baseline'>
-                                                    <h3 className="text-md font-medium text-gray-900">Please login to view your cart.</h3>
-                                                    <Button variant={"secondary"}><Link to="/login">Login</Link></Button>  
-                                                </div>
-                                                <div className='flex flex-row justify-between items-end'>
-                                                    <h3 className="text-md font-medium text-gray-900">Don't have an account?</h3>
-                                                    <Button><Link to="/register">Create Account</Link></Button>  
-                                                </div>
+                                                <div className='flex py-8 h-full w-full flex-col overflow-hidden justify-between'>
+                                                    <div className='flex flex-row justify-between items-baseline'>
+                                                        <h3 className="text-md font-medium text-gray-900">Please login to view your cart.</h3>
+                                                        <Button variant={"secondary"}><Link to="/login">Login</Link></Button>
+                                                    </div>
+                                                    <div className='flex flex-row justify-between items-end'>
+                                                        <h3 className="text-md font-medium text-gray-900">Don't have an account?</h3>
+                                                        <Button><Link to="/register">Create Account</Link></Button>
+                                                    </div>
 
                                                 </div>
                                             )}
@@ -152,7 +159,7 @@ export default function Cart() {
                                                 </div>
                                                 <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                                                 <div className="mt-6">
-                                                    <Button><Link to='/checkout'>Checkout</Link></Button>
+                                                    <Button className="cta"><Link to='/checkout'>Checkout</Link></Button>
                                                 </div>
                                             </div>
                                         )}
