@@ -90,5 +90,5 @@ export default {
       },
     },
   },
-  plugins: [postcssNesting, tailwindcssAnimate, tailwindcssLineClamp],
+  plugins: [postcssNesting(), tailwindcssAnimate, tailwindcssLineClamp],
 };
