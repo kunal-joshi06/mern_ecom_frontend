@@ -19,18 +19,26 @@ const registerUserAsync = createAsyncThunk(
 const updatePasswordAsync = createAsyncThunk(
   "user/updatePassword",
   async (data: UpdatePasswordRequest) => {
-    const response = await updatePassword(data);
-    console.log(response);
-    return response.data;
+    try {
+      const response = await updatePassword(data);
+      toast.success("Password Changed Successfully");
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+    toast.error("Failed to change password");
   }
 );
 
 const createNewOrderAsync = createAsyncThunk(
   "user/createOrder",
   async (data: CreateNewOrder) => {
-    const response = await createOrder(data);
-    console.log(response);
-    return response.data;
+    try {
+      const response = await createOrder(data);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 
@@ -83,18 +91,15 @@ export const authSlice = createSlice({
       })
       .addCase(updatePasswordAsync.fulfilled, (state) => {
         state.loading = "succeeded";
-        toast.success("Password Changed Successfully");
       })
       .addCase(updatePasswordAsync.rejected, (state) => {
         state.loading = "failed";
-        toast.error("Failed to change password");
       })
       .addCase(createNewOrderAsync.pending, (state) => {
         state.loading = "pending";
       })
       .addCase(createNewOrderAsync.fulfilled, (state) => {
         state.loading = "succeeded";
-        toast.success("Order Created Successfully");
       })
       .addCase(createNewOrderAsync.rejected, (state) => {
         state.loading = "failed";
