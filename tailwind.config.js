@@ -1,8 +1,10 @@
-const postcssNesting = require("postcss-nesting");
+import postcssNesting from "postcss-nesting";
+import tailwindcssAnimate from "tailwindcss-animate";
+import tailwindcssLineClamp from "@tailwindcss/line-clamp";
 /** @type {import('tailwindcss').Config} */
 
-module.exports = {
-  darkMode: 'class',
+export default {
+  darkMode: "class",
   content: [
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
@@ -88,8 +90,5 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    postcssNesting,
-    require("tailwindcss-animate", "@tailwindcss/line-clamp"),
-  ],
+  plugins: [postcssNesting(), tailwindcssAnimate, tailwindcssLineClamp],
 };
