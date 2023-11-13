@@ -14,7 +14,8 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { loginUserAsync } from "../store/features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { EyeIcon, EyeOffIcon } from "lucide-react"
 
 
 export default function Login() {
@@ -32,7 +33,7 @@ export default function Login() {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const isLoggedIn = useAppSelector((state) => state.auth.user.isLoggedIn);
-
+    const [showPassword, setShowPassword] = useState(false);
     const onSubmit: SubmitHandler<Inputs> = (data) => dispatch(loginUserAsync(data));
 
     useEffect(() => {
@@ -52,16 +53,26 @@ export default function Login() {
                         <CardContent className="grid gap-4">
                             <div className="grid gap-2">
                                 <Label htmlFor="email">Email</Label>
-                                <Input id="email" type="email" placeholder="m@example.com" 
-                                 {...register("email", { required: true })} // Add required attribute
+                                <Input id="email" type="email" placeholder="m@example.com"
+                                    {...register("email", { required: true })} // Add required attribute
                                 />
                             </div>
                             {errors.email && <span className='text-sm text-red-600'>This field is required</span>}
-                            <div className="grid gap-2">
+                            <div className="grid gap-2 relative">
                                 <Label htmlFor="password">Password</Label>
-                                <Input id="password" type="password" 
-                                 {...register("password", { required: true })}
+                                <Input id="password" type={showPassword ? "text" : "password"}
+                                    {...register("password", { required: true })}
                                 />
+                                <div
+                                    className="absolute right-3 top-10 transform -translate-y-1/2"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                >
+                                    {showPassword ? (
+                                        <EyeOffIcon className="h-6 w-6 text-gray-400" />
+                                    ) : (
+                                        <EyeIcon className="h-6 w-6 text-gray-400" />
+                                    )}
+                                </div>
                             </div>
                             {errors.password && <span className='text-sm text-red-600'>This field is required</span>}
                             <div className="relative flex justify-center text-xs uppercase">
