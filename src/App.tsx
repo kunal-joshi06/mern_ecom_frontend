@@ -11,6 +11,8 @@ import AccountSettings from "./pages/AccountSettings"
 import Checkout from "./pages/Checkout"
 import AllProducts from "./pages/productPages/Products"
 import ErrorPage  from "./components/ErrorPage"
+import OrdersPage from "./pages/orders/OrdersPage"
+import OrderDetail from "./pages/orders/OrderDetail"
 
 
 function App() {
@@ -46,6 +48,14 @@ function App() {
     {
       path: "/account-settings",
       element: <Layout><AccountSettings /></Layout>
+    },
+    {
+      path: "/orders",
+      element: <Layout><OrdersPage /></Layout>
+    },
+    {
+      path: "/orders/:oId",
+      element: <Layout><OrderDetail /></Layout>
     },
     {
       path: "/checkout",

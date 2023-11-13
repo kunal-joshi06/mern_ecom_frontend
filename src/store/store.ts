@@ -6,11 +6,13 @@ import productsReducer, {
   productState,
 } from "./features/products/productSlice";
 import cartReducer, { CartState } from "./features/cart/cartSlice";
+import orderReducer, { orderState } from "./features/orders/orderSlice";
 
 export interface RootState {
   auth: authState;
   products: productState;
   cart: CartState;
+  orders: orderState;
 }
 
 const persistConfig = {
@@ -23,6 +25,7 @@ const rootReducer: Reducer<RootState> = combineReducers({
   auth: authReducer,
   products: productsReducer,
   cart: cartReducer,
+  orders: orderReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

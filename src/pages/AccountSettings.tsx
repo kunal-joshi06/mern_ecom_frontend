@@ -2,19 +2,19 @@ import ChangePasswordModal from "@/components/Modals/ChangePasswordModal"
 // import EditUserDetailsModal from "@/components/Modals/EditUserDetailsModal"
 import BreadCrumb from "@/components/ProductDetails/BreadCrumb"
 import { useAppSelector } from "@/store/hooks"
-
+import { Link, useNavigate } from "react-router-dom"
 
 const AccountSettings = () => {
-
+    const navigate = useNavigate();
     const user = useAppSelector(state => state.auth.user)
 
     return (
         <>
             <div className="container mx-auto max-full px-4 py-12 sm:px-6 sm:py-18 h-screen">
                 <BreadCrumb currentPage="Account Settings" />
-                <h1 className="text-2xl font-bold tracking-tight text-gray-900">Account Settings</h1>
+                <h1 className="text-2xl pb-6 lg:pb-0 font-bold tracking-tight text-gray-900">Account Settings</h1>
 
-                <div className="bg-white overflow-hidden shadow rounded-lg border m-10 w-1/2">
+                <div className="bg-white overflow-hidden shadow rounded-lg border lg:m-10 w-full lg:w-1/2">
                     <div className="px-4 py-5 sm:px-6">
                         <div className="flex justify-between">
                             <h3 className="text-lg leading-6 font-medium text-gray-900">
@@ -45,6 +45,14 @@ const AccountSettings = () => {
                                     {user.email}
                                 </div>
                             </div>
+                            <div className="py-3 px-6 flex justify-between">
+                                <div className="text-sm font-medium text-gray-500">
+                                    My Orders
+                                </div>
+                                <div className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                    <Link to="javascript:void(0);" className="text-blue-500 hover:underline" onClick={()=>navigate("/orders")}>show all orders</Link>
+                                </div>
+                            </div>
                             {/* <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                 <dt className="text-sm font-medium text-gray-500">
                                     Phone number
@@ -66,7 +74,7 @@ const AccountSettings = () => {
                     </div>
                 </div>
 
-                <div className="mx-10">
+                <div className="mx-auto pt-6 lg:pt-0 lg:mx-10">
                     <ChangePasswordModal />
                 </div>
             </div>
@@ -76,3 +84,4 @@ const AccountSettings = () => {
 }
 
 export default AccountSettings
+
