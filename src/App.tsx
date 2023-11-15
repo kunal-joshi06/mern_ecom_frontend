@@ -12,7 +12,7 @@ import AllProducts from "./pages/productPages/Products"
 import ErrorPage from "./components/ErrorPage"
 import OrdersPage from "./pages/orders/OrdersPage"
 import OrderDetail from "./pages/orders/OrderDetail"
-import PaymentCancel from "./pages/payments/PaymentFailed"
+import PaymentCancel from "./pages/payments/paymentFailed"
 
 
 function App() {

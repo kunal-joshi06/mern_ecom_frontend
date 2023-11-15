@@ -4,7 +4,7 @@ import { ProductType } from '../../store/features/products/productType';
 import { getAllProductsAsync } from '../../store/features/products/productSlice';
 import Sidebar from './Sidebar';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import PaginationComponent from '../Pagination';
+import PaginationComponent from '../pagination';
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Filter } from "lucide-react";
