@@ -5,14 +5,14 @@ import Login from "./pages/Login"
 import Register from "./pages/Register"
 import { Toaster } from 'react-hot-toast';
 import ProductDetail from "./pages/productPages/ProductDetail";
-import PaymentCancel from "./pages/payments/paymentFailed"
 import PaymentSuccess from "./pages/payments/PaymentSuccess"
 import AccountSettings from "./pages/AccountSettings"
 import Checkout from "./pages/Checkout"
 import AllProducts from "./pages/productPages/Products"
-import ErrorPage  from "./components/ErrorPage"
+import ErrorPage from "./components/ErrorPage"
 import OrdersPage from "./pages/orders/OrdersPage"
 import OrderDetail from "./pages/orders/OrderDetail"
+import PaymentCancel from "./pages/payments/PaymentFailed"
 
 
 function App() {
@@ -61,7 +61,8 @@ function App() {
       path: "/checkout",
       element: <Checkout />
     },
-    { path: "*",
+    {
+      path: "*",
       element: <ErrorPage />
     }
   ])
