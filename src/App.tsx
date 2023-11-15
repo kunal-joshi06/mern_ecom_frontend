@@ -43,7 +43,7 @@ function App() {
     },
     {
       path: "/payment-cancel",
-      element: <Layout><PaymentCancel /></Layout>
+      element: <PaymentCancel />
     },
     {
       path: "/account-settings",
