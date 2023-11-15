@@ -19,7 +19,7 @@ function OrdersPage() {
         dispatch(getLoggedInUserOrdersAsync());
     }, [dispatch]);
     function showDate(orderDate: string) {
-        var d = new Date(orderDate);
+        const d = new Date(orderDate);
         return d.toLocaleDateString('en-GB'); // dd/mm/yyyy
     }
 
