@@ -12,12 +12,13 @@ import { v4 as uuidv4 } from 'uuid';
 
 function OrdersPage() {
     const dispatch = useAppDispatch();
+    const authToken = useAppSelector((state) => state.auth.user.token)
     const navigate = useNavigate();
     const orders = useAppSelector(state => state.orders.orders);
     const uniqueID = uuidv4();
     useEffect(() => {
-        dispatch(getLoggedInUserOrdersAsync());
-    }, [dispatch]);
+        dispatch(getLoggedInUserOrdersAsync(authToken!));
+    }, [authToken, dispatch]);
     function showDate(orderDate: string) {
         const d = new Date(orderDate);
         return d.toLocaleDateString('en-GB'); // dd/mm/yyyy

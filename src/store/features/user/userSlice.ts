@@ -18,9 +18,9 @@ const registerUserAsync = createAsyncThunk(
 
 const updatePasswordAsync = createAsyncThunk(
   "user/updatePassword",
-  async (data: UpdatePasswordRequest) => {
+  async ({ data, token }: { data: UpdatePasswordRequest; token: string }) => {
     try {
-      const response = await updatePassword(data);
+      const response = await updatePassword(data, token);
       toast.success("Password Changed Successfully");
       return response.data;
     } catch (error) {
@@ -32,9 +32,9 @@ const updatePasswordAsync = createAsyncThunk(
 
 const createNewOrderAsync = createAsyncThunk(
   "user/createOrder",
-  async (data: CreateNewOrder) => {
+  async ({ data, token }: { data: CreateNewOrder; token: string }) => {
     try {
-      const response = await createOrder(data);
+      const response = await createOrder(data, token);
       return response.data;
     } catch (error) {
       console.log(error);

@@ -3,12 +3,12 @@ import { Dialog, Transition } from '@headlessui/react'
 import { useForm, SubmitHandler } from "react-hook-form"
 import { EyeIcon } from '@heroicons/react/24/outline'
 import { EyeOffIcon } from 'lucide-react'
-import { useAppDispatch } from '@/store/hooks'
+import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { updatePasswordAsync } from '@/store/features/user/userSlice'
 
 const ChangePasswordModal = () => {
     const dispatch = useAppDispatch();
-
+    const authToken = useAppSelector((state) => state.auth.user.token)
     type Inputs = {
         oldPassword: string;
         newPassword: string;
@@ -22,7 +22,7 @@ const ChangePasswordModal = () => {
     } = useForm<Inputs>();
 
     const onSubmit: SubmitHandler<Inputs> = (data) => {
-        dispatch(updatePasswordAsync(data))
+        dispatch(updatePasswordAsync({ data, token: authToken! }))
         handleClose()
     };
 
