@@ -10,12 +10,13 @@ import { Button } from "@/components/ui/button";
 import { Filter } from "lucide-react";
 import { setFilterOpen } from '../../store/features/products/productSlice'
 import FilterModal from '../../components/FilterModal'
-
+import SkeletonHCard from "@/components/Loaders/SkeletonHCard";
+import Oops from "@/components/Loaders/Oops";
 
 function AllProducts() {
   const dispatch = useAppDispatch();
 
-  const { products, page, limit, filterByCategory, minPrice, maxPrice } = useAppSelector((store) => store.products);
+  const { products, page, limit, filterByCategory, minPrice, maxPrice, loading } = useAppSelector((store) => store.products);
   useEffect(() => {
     const queryParams: {
       page?: string;
@@ -46,10 +47,16 @@ function AllProducts() {
           <div className="col-span-3 lg:col-span-4 lg:border-l">
             <div className="h-full px-4 py-6 lg:px-8">
               <ScrollArea className="bg-white h-screen no-scrollbar overflow-auto lg:col-span-3 ">
-                <div className="container mx-auto max-full">
+                <div className="container mx-auto max-full">{
+                  loading == 'succeeded' ?
                   <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-6 place-items-center">
-                    {products.map((product: ProductType, index: number) => (<ProductCardHorizontal key={index} {...product} />))}
+                    {   products.map((product: ProductType, index: number) => (<ProductCardHorizontal key={index} {...product} />))}
                   </div>
+                    : loading == 'failed' ? <Oops/> :
+                    <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-6 place-items-center">
+                    {  Array.from(Array(6)).map(()=><SkeletonHCard />)}
+                    </div>
+                }
                 </div>
               </ScrollArea>
               <PaginationComponent />
