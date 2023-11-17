@@ -22,13 +22,16 @@ export const registerUser = async (data: RegisterRequest) => {
   }
 };
 
-export const updatePassword = async (data: UpdatePasswordRequest) => {
+export const updatePassword = async (
+  data: UpdatePasswordRequest,
+  token: string
+) => {
   try {
     const config = {
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
-      withCredentials: true,
     };
     const response = await axios.put(`${apiUrl}/password/update`, data, config);
     return response;
@@ -38,13 +41,13 @@ export const updatePassword = async (data: UpdatePasswordRequest) => {
   }
 };
 
-export const createOrder = async (data: CreateNewOrder) => {
+export const createOrder = async (data: CreateNewOrder, token: string) => {
   try {
     const config = {
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
-      withCredentials: true,
     };
     const response = await axios.post(`${apiUrl}/order/new`, data, config);
     return response;

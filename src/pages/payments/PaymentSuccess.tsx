@@ -6,13 +6,14 @@ import { Link } from "react-router-dom";
 const PaymentSuccess = () => {
 
     const dispatch = useAppDispatch()
+    const authToken = useAppSelector((state) => state.auth.user.token)
     const orderId = useAppSelector(state => state.cart.orderId)
     const orderItems = useAppSelector(state => state.cart.cartItems)
     const shippingInfo = useAppSelector(state => state.cart.shippingInfo)
     const totalPrice = useAppSelector(state => state.cart.cartTotal)
 
     useEffect(() => {
-        dispatch(createNewOrderAsync({
+        const data = {
             orderItems,
             shippingInfo,
             paymentInfo: {
@@ -21,9 +22,10 @@ const PaymentSuccess = () => {
                 totalPrice,
                 paidAt: new Date(),
             },
-            orderStatus: "Processing"
-        }))
-    }, [dispatch, orderId, orderItems, shippingInfo, totalPrice])
+            orderStatus: "Processing",
+        }
+        dispatch(createNewOrderAsync({ data, token: authToken! }))
+    }, [authToken, dispatch, orderId, orderItems, shippingInfo, totalPrice])
     return (
         <div className="flex items-center justify-center h-screen">
             <div className="bg-gray-100">

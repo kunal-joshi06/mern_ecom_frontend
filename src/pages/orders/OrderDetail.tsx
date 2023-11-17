@@ -7,13 +7,14 @@ import { Card } from '@/components/ui/card';
 function OrderDetail() {
   const { oId } = useParams();
   const dispatch = useAppDispatch();
-  const currentOrder = useAppSelector(state => state.orders.currentOrder);
+  const authToken = useAppSelector((state) => state.auth.user.token)
+  // const currentOrder = useAppSelector(state => state.orders.currentOrder);
 
   useEffect(() => {
     if (oId) {
-        dispatch(getSingleOrderAsync(oId))
+      dispatch(getSingleOrderAsync({ id: oId, token: authToken! }))
     }
-}, [dispatch, oId])
+  }, [authToken, dispatch, oId])
   return (
     <div className="min-h-screen">
     <Card>

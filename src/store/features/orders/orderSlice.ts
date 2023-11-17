@@ -1,12 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getLoggedInUserOrders,getSingleOrder } from "./orderApi";
+import { getLoggedInUserOrders, getSingleOrder } from "./orderApi";
 import { OrderType } from "./orderType";
 
 const getLoggedInUserOrdersAsync = createAsyncThunk(
-    "orders/getLoggedInUserOrders",
-    async () => {
+  "orders/getLoggedInUserOrders",
+  async (token: string) => {
     try {
-      const response = await getLoggedInUserOrders();
+      const response = await getLoggedInUserOrders(token);
       return response.data;
     } catch (error) {
       console.error("Error Fetching Products", error);
@@ -16,9 +16,9 @@ const getLoggedInUserOrdersAsync = createAsyncThunk(
 
 const getSingleOrderAsync = createAsyncThunk(
   "orders/getSingleOrder",
-  async (id: string) => {
+  async ({ id, token }: { id: string; token: string }) => {
     try {
-      const response = await getSingleOrder(id);
+      const response = await getSingleOrder(id, token);
       return response.data;
     } catch (error) {
       console.error("Error Fetching order details", error);
@@ -63,7 +63,7 @@ export const orderSlice = createSlice({
       })
       .addCase(getSingleOrderAsync.rejected, (state) => {
         state.loading = "failed";
-      })
+      });
   },
 });
 
