@@ -31,7 +31,7 @@ function OrdersPage() {
 
             <ScrollArea className="h-screen no-scrollbar overflow-auto p-10">
                 {orders.length > 0 ?
-                    <div className="grid gap-4 lg:grid-cols-2">
+                    <div className="grid gap-4 lg:grid-cols-2 2xl:grid-cols-3">
                         {orders.map((order) => (
                             order.orderItems.map((item) => (
 
@@ -40,7 +40,7 @@ function OrdersPage() {
                                         <Link className="text-rose-500" to={order._id}>#{item._id}</Link>
                                     </CardHeader>
                                     <CardHeader className="text-sm text-gray-600 lg:flex flex-row items-center justify-between hidden">
-                                        <Link className="text-rose-500" to={order._id}>#{item._id}</Link>
+                                        <Link className="text-blue-500" to={order._id}>#{item._id}</Link>
                                         <p>Placed on: {showDate(order.createdAt)}</p>
                                     </CardHeader>
                                     <Separator></Separator>
