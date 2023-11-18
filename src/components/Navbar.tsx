@@ -4,7 +4,6 @@ import { UserNav } from "./Navbar/UserNav";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
 import { setOpen } from "@/store/features/cart/cartSlice";
-import { Input } from "./ui/input";
 
 function Navbar() {
     const dispatch = useAppDispatch();
@@ -17,13 +16,6 @@ function Navbar() {
                 <div className="border-b">
                     <div className="flex h-16 items-center px-4">
                         <MainNav className="mx-6" />
-                        <div>
-                            <Input
-                                type="search"
-                                placeholder="Search..."
-                                className="md:w-[100px] lg:w-[300px]"
-                            />
-                        </div>
                         <div className="ml-auto flex items-center space-x-4">
                             <button type="button" onClick={() => dispatch(setOpen())} className="relative inline-flex items-center text-sm font-medium text-center bg-white">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="Black" className="w-6 h-6">

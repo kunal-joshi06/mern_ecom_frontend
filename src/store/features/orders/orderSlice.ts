@@ -28,13 +28,13 @@ const getSingleOrderAsync = createAsyncThunk(
 
 export interface orderState {
   orders: OrderType[];
-  currentOrder: OrderType[];
+  currentOrder: {};
   loading: "idle" | "pending" | "succeeded" | "failed";
 }
 
 const initialState: orderState = {
   orders: [],
-  currentOrder: [],
+  currentOrder: {},
   loading: "idle",
 };
 
