@@ -12,7 +12,6 @@ import SkeletonVCard from "@/components/Loaders/SkeletonVCard";
 import Oops from "@/components/Loaders/Oops";
 
 const Home = () => {
-
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getAllProductsAsync({ page: "1", limit: "8" }))
@@ -36,7 +35,7 @@ const Home = () => {
             :  loading == 'failed' ? <Oops/> 
             :
             <div className="h-full w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-            {  Array.from(Array(4)).map(()=><SkeletonVCard />)}
+            {  Array.from(Array(4)).map((index)=><SkeletonVCard key={index} />)}
             </div>
             }
           </div>

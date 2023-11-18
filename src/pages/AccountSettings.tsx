@@ -1,8 +1,9 @@
 import ChangePasswordModal from "@/components/Modals/ChangePasswordModal"
 // import EditUserDetailsModal from "@/components/Modals/EditUserDetailsModal"
 import BreadCrumb from "@/components/ProductDetails/BreadCrumb"
+import { Button } from "@/components/ui/button"
 import { useAppSelector } from "@/store/hooks"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 const AccountSettings = () => {
     const navigate = useNavigate();
@@ -45,12 +46,12 @@ const AccountSettings = () => {
                                     {user.email}
                                 </div>
                             </div>
-                            <div className="py-3 px-6 flex justify-between">
+                            <div className="py-3 px-6 flex justify-between items-center">
                                 <div className="text-sm font-medium text-gray-500">
                                     My Orders
                                 </div>
                                 <div className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                    <Link to="javascript:void(0);" className="text-blue-500 hover:underline" onClick={()=>navigate("/orders")}>show all orders</Link>
+                                    <Button variant={"link"}  className="text-blue-500" onClick={()=>navigate("/orders")}>show all orders</Button>
                                 </div>
                             </div>
                             {/* <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">

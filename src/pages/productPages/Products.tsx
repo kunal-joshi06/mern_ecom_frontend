@@ -54,7 +54,7 @@ function AllProducts() {
                   </div>
                     : loading == 'failed' ? <Oops/> :
                     <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-6 place-items-center">
-                    {  Array.from(Array(6)).map(()=><SkeletonHCard />)}
+                    {  Array.from(Array(6)).map((index)=><SkeletonHCard key={index} />)}
                     </div>
                 }
                 </div>
