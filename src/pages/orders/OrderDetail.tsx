@@ -14,7 +14,7 @@ function OrderDetail() {
       dispatch(getSingleOrderAsync({ id: oId, token: authToken! }))
     }
   }, [authToken, dispatch, oId])
-
+ 
   return (
     <section className="text-gray-700 body-font overflow-hidden bg-white h-auto">
       <div className="p-8 space-y-4">
