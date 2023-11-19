@@ -35,7 +35,7 @@ const Home = () => {
             :  loading == 'failed' ? <Oops/> 
             :
             <div className="h-full w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-            {  Array.from(Array(4)).map((index)=><SkeletonVCard key={index} />)}
+            {  Array.from(Array(4)).map((num,index)=>(<div key={index|num}><SkeletonVCard/></div>))}
             </div>
             }
           </div>

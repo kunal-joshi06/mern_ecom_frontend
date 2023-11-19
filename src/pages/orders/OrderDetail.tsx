@@ -14,9 +14,7 @@ function OrderDetail() {
       dispatch(getSingleOrderAsync({ id: oId, token: authToken! }))
     }
   }, [authToken, dispatch, oId])
-  useEffect(() => {
-    console.log(currentOrder);
-  }, [currentOrder])
+ 
   return (
     <section className="text-gray-700 body-font overflow-hidden bg-white h-auto">
       <div className="p-8 space-y-4">
@@ -28,8 +26,8 @@ function OrderDetail() {
           <CardContent className="flex flex-col">
             <p className="font-semibold">Order</p>
             {
-              currentOrder.orderItems.map(item => (
-                <div>
+              currentOrder && currentOrder.orderItems.map((item, index) => (
+                <div key={index}>
                   <p>{item.name}x({item.quantity})</p>
                 </div>
               ))
