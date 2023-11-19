@@ -8,6 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Card, CardContent, CardFooter, CardHeader, } from '@/components/ui/card';
 import { currency } from '../../components/currency'
 import { Separator } from "@/components/ui/separator";
+import Review from '../../components/Rating/Review';
 
 
 function OrdersPage() {
@@ -50,9 +51,10 @@ function OrdersPage() {
                                             </div>
                                             <p className="font-medium">{item.name}(x{item.quantity})</p>
                                             <p className="font-medium hidden lg:block">{currency((item.price))}</p>
-                                            <Button variant={"secondary"} className="px-6">
+                                            {/* <Button variant={"secondary"} className="px-6">
                                                 Review
-                                            </Button>
+                                            </Button> */}
+                                            <Review pId={item._id} name={item.name} />
                                         </div>
                                     ))}
                                 </CardContent>
