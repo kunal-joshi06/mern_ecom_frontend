@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getLoggedInUserOrders, getSingleOrder } from "./orderApi";
-import { OrderType } from "./orderType";
+import { OrderType, SingleOrder } from "./orderType";
 
 const getLoggedInUserOrdersAsync = createAsyncThunk(
   "orders/getLoggedInUserOrders",
@@ -28,13 +28,13 @@ const getSingleOrderAsync = createAsyncThunk(
 
 export interface orderState {
   orders: OrderType[];
-  currentOrder: {};
+  currentOrder?: SingleOrder;
   loading: "idle" | "pending" | "succeeded" | "failed";
 }
 
 const initialState: orderState = {
   orders: [],
-  currentOrder: {},
+  currentOrder: undefined,
   loading: "idle",
 };
 
@@ -59,7 +59,7 @@ export const orderSlice = createSlice({
       })
       .addCase(getSingleOrderAsync.fulfilled, (state, action) => {
         state.loading = "succeeded";
-        state.currentOrder = action.payload.order;
+        state.currentOrder = {...action.payload.order};
       })
       .addCase(getSingleOrderAsync.rejected, (state) => {
         state.loading = "failed";
