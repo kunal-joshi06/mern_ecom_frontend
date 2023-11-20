@@ -17,7 +17,7 @@ const Home = () => {
     dispatch(getAllProductsAsync({ page: "1", limit: "8" }))
   }, [dispatch])
 
-  const {loading, products} = useAppSelector((store) => store.products);
+  const { loading, products } = useAppSelector((store) => store.products);
   return (
     <main className="w-100">
       <section className="relative">
@@ -28,15 +28,15 @@ const Home = () => {
           <h2 className="text-2xl font-bold tracking-tight text-gray-900">Our top products</h2>
           <div className="container mx-auto p-4 h-full flex items-center justify-center">
             {
-              loading == 'succeeded' ? 
-            <div className="h-full w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-              {products.map((product: ProductType) => (<ProductHomeCard key={product._id} {...product} />))}
-            </div>
-            :  loading == 'failed' ? <Oops/> 
-            :
-            <div className="h-full w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-            {  Array.from(Array(4)).map((num,index)=>(<div key={index|num}><SkeletonVCard/></div>))}
-            </div>
+              loading == 'succeeded' ?
+                <div className="h-full w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+                  {products.map((product: ProductType) => (<ProductHomeCard key={product._id} {...product} />))}
+                </div>
+                : loading == 'failed' ? <Oops />
+                  :
+                  <div className="h-full w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+                    {Array.from(Array(4)).map((num, index) => (<div key={index | num}><SkeletonVCard /></div>))}
+                  </div>
             }
           </div>
         </div>
