@@ -21,10 +21,10 @@ function OrdersPage() {
     }, [authToken, dispatch]);
     function showDate(orderDate: string) {
         const d = new Date(orderDate);
-        return d.toLocaleDateString('en-GB'); // dd/mm/yyyy
+        return d.toLocaleDateString('en-GB');
     }
     return (
-        <div className="min:h-screen">
+        <div className="h-screen">
             <div className="w-full">
                 <BreadCrumb currentPage="My Orders" />
             </div>
@@ -41,7 +41,7 @@ function OrdersPage() {
                                     <Separator></Separator>
                                     <CardContent className="px-6 py-0 mt-4  lg:h-1/2">
                                         <ScrollArea className="h-full">
-                                            {order.orderItems.map((item,index) => (
+                                            {order.orderItems.map((item, index) => (
                                                 <div key={index} className="flex flex-col space-y-4 lg:space-y-0 lg:flex-row w-full items-center justify-between p-4 text-xs lg:text-sm xl:text-base" >
                                                     <div className="h-36 w-36 lg:h-16 lg:w-16 flex-shrink-0 overflow-hidden rounded-md">
                                                         {item.imageUrl && <img

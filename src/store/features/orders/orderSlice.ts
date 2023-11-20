@@ -28,13 +28,13 @@ const getSingleOrderAsync = createAsyncThunk(
 
 export interface orderState {
   orders: OrderType[];
-  currentOrder?: SingleOrder;
+  currentOrder: SingleOrder;
   loading: "idle" | "pending" | "succeeded" | "failed";
 }
 
 const initialState: orderState = {
   orders: [],
-  currentOrder: undefined,
+  currentOrder: {} as SingleOrder,
   loading: "idle",
 };
 
@@ -59,7 +59,7 @@ export const orderSlice = createSlice({
       })
       .addCase(getSingleOrderAsync.fulfilled, (state, action) => {
         state.loading = "succeeded";
-        state.currentOrder = {...action.payload.order};
+        state.currentOrder = { ...action.payload.order };
       })
       .addCase(getSingleOrderAsync.rejected, (state) => {
         state.loading = "failed";

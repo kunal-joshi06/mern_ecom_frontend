@@ -14,23 +14,22 @@ function OrderDetail() {
       dispatch(getSingleOrderAsync({ id: oId, token: authToken! }))
     }
   }, [authToken, dispatch, oId])
- 
+
   return (
     <section className="text-gray-700 body-font overflow-hidden bg-white h-auto">
       <div className="p-8 space-y-4">
         <Card>
           <CardHeader>
-            <CardTitle>{currentOrder?.user.name}</CardTitle>
-            <CardDescription>{currentOrder?.user.email}</CardDescription>
+            <CardTitle>{currentOrder?.user?.name}</CardTitle>
+            <CardDescription>{currentOrder?.user?.email}</CardDescription>
           </CardHeader>
           <CardContent className="flex flex-col">
             <p className="font-semibold">Order</p>
-            {
-              currentOrder && currentOrder.orderItems.map((item, index) => (
-                <div key={index}>
-                  <p>{item.name}x({item.quantity})</p>
-                </div>
-              ))
+            {currentOrder?.orderItems?.map((item, index) => (
+              <div key={index}>
+                <p>{item.name}x({item.quantity})</p>
+              </div>
+            ))
             }
           </CardContent>
         </Card>
@@ -40,9 +39,9 @@ function OrderDetail() {
             <CardTitle>Shipping information</CardTitle>
           </CardHeader>
           <CardContent className="flex flex-col">
-            <p>Status: {currentOrder?.paymentInfo.status}</p>
-            <p>Date: {currentOrder?.paymentInfo.paidAt}</p>
-            <p>Total: {currentOrder?.paymentInfo.totalPrice}</p>
+            <p>Status: {currentOrder?.paymentInfo?.status}</p>
+            <p>Date: {currentOrder?.paymentInfo?.paidAt}</p>
+            <p>Total: {currentOrder?.paymentInfo?.totalPrice}</p>
           </CardContent>
         </Card>
 
@@ -51,11 +50,11 @@ function OrderDetail() {
             <CardTitle>Shipping information</CardTitle>
           </CardHeader>
           <CardContent className="flex flex-col">
-            <p>Address: {currentOrder?.shippingInfo.address}</p>
-            <p>City: {currentOrder?.shippingInfo.city}</p>
-            <p>Country: {currentOrder?.shippingInfo.country}</p>
-            <p>Pincode: {currentOrder?.shippingInfo.pinCode}</p>
-            <p>Phone: {currentOrder?.shippingInfo.phoneNo}</p>
+            <p>Address: {currentOrder?.shippingInfo?.address}</p>
+            <p>City: {currentOrder?.shippingInfo?.city}</p>
+            <p>Country: {currentOrder?.shippingInfo?.country}</p>
+            <p>Pincode: {currentOrder?.shippingInfo?.pinCode}</p>
+            <p>Phone: {currentOrder?.shippingInfo?.phoneNo}</p>
           </CardContent>
         </Card>
       </div>
