@@ -26,7 +26,7 @@ function AllProducts() {
       maxPrice?: number;
     } = {
       page: page.toString(),
-      limit: limit.toString(),
+      limit: "9",
       filterBy: filterByCategory,
       minPrice: minPrice,
       maxPrice: maxPrice,
