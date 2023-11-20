@@ -50,7 +50,7 @@ export interface productState {
 const initialState: productState = {
   page: 1,
   totalProducts: 0,
-  limit: 8,
+  limit: 9,
   filterOpen: false,
   filterByCategory: [],
   minPrice: 0,
