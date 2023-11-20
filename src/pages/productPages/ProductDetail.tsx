@@ -17,7 +17,8 @@ import {
     RedditShareButton,
     TelegramIcon,
     TelegramShareButton,
-  } from "react-share";
+} from "react-share";
+import Loader from "@/components/Loaders/Loader"
 
 
 const ProductDetail = () => {
@@ -26,7 +27,8 @@ const ProductDetail = () => {
     const dispatch = useAppDispatch()
 
     const isLoggedIn = useAppSelector(state => state.auth.user.isLoggedIn)
-    const currentProduct:ProductType = useAppSelector(state => state.products.currentProduct)
+    const currentProduct: ProductType = useAppSelector(state => state.products.currentProduct)
+    const isLoading = useAppSelector(state => state.products.loading);
 
     const handleAddToCart = (product: ProductType) => {
         isLoggedIn ? dispatch(addItemToCart(product)) : toast.error("Please Login To Add Item")
@@ -40,8 +42,8 @@ const ProductDetail = () => {
     }, [dispatch, pId])
 
     return (
-        <section className="text-gray-700 body-font overflow-hidden bg-white">
-            <div className="container px-5 py-24 mx-auto">
+        <section className="text-gray-700 body-font overflow-hidden bg-white h-screen">
+            {isLoading !== "succeeded" ? <Loader /> : <div className="container px-5 py-24 mx-auto">
                 <BreadCrumb currentPage={currentProduct?.name} />
                 <div className="lg:w-4/5 mx-auto flex flex-wrap">
                     {currentProduct?.imageUrl ? <img alt="ecommerce" className="lg:w-1/2 w-full object-cover object-center rounded border border-gray-200" src={currentProduct.imageUrl} /> : "No Product Image found"}
@@ -55,17 +57,17 @@ const ProductDetail = () => {
                                 <span className="text-gray-600 ml-3">{currentProduct?.reviews.length} Reviews</span>
                             </span>
                             <span className="flex ml-3 pl-3 py-2 border-l-2 space-x-2 border-gray-200">
-                            <FacebookShareButton quote="Checkout this awesome product !"  url={shareUrl} >
-                                <FacebookIcon size={24} round={true} />
-                            </FacebookShareButton>
-                            
-                            <RedditShareButton title="Checkout this awesome product !"  url={shareUrl} >
-                                <RedditIcon size={24} round={true}/>
-                            </RedditShareButton>
-                            
-                            <TelegramShareButton title="Checkout this awesome product !"  url={shareUrl} >
-                                <TelegramIcon size={24} round={true}/>
-                            </TelegramShareButton>
+                                <FacebookShareButton quote="Checkout this awesome product !" url={shareUrl} >
+                                    <FacebookIcon size={24} round={true} />
+                                </FacebookShareButton>
+
+                                <RedditShareButton title="Checkout this awesome product !" url={shareUrl} >
+                                    <RedditIcon size={24} round={true} />
+                                </RedditShareButton>
+
+                                <TelegramShareButton title="Checkout this awesome product !" url={shareUrl} >
+                                    <TelegramIcon size={24} round={true} />
+                                </TelegramShareButton>
                             </span>
                         </div>
                         <p className="flex items-center">
@@ -112,7 +114,8 @@ const ProductDetail = () => {
                         </ScrollArea>}
                     </div>
                 </div>
-            </div>
+            </div>}
+
         </section>
     )
 }

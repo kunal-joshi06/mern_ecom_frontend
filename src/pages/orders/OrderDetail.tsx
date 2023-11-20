@@ -3,12 +3,14 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks"
 import { useEffect } from "react";
 import { useParams } from "react-router-dom"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import Loader from "@/components/Loaders/Loader";
 
 function OrderDetail() {
   const { oId } = useParams();
   const dispatch = useAppDispatch();
   const authToken = useAppSelector((state) => state.auth.user.token)
   const currentOrder = useAppSelector((state) => state.orders.currentOrder);
+  const isLoading = useAppSelector(state => state.orders.loading)
   useEffect(() => {
     if (oId) {
       dispatch(getSingleOrderAsync({ id: oId, token: authToken! }))
@@ -17,7 +19,7 @@ function OrderDetail() {
 
   return (
     <section className="text-gray-700 body-font overflow-hidden bg-white h-auto">
-      <div className="p-8 space-y-4">
+      {isLoading != 'succeeded' ? <Loader /> : <div className="p-8 space-y-4">
         <Card>
           <CardHeader>
             <CardTitle>{currentOrder?.user?.name}</CardTitle>
@@ -57,8 +59,7 @@ function OrderDetail() {
             <p>Phone: {currentOrder?.shippingInfo?.phoneNo}</p>
           </CardContent>
         </Card>
-      </div>
-
+      </div>}
     </section>
   )
 }

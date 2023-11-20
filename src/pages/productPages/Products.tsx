@@ -49,14 +49,14 @@ function AllProducts() {
               <ScrollArea className="bg-white h-screen no-scrollbar overflow-auto lg:col-span-3 ">
                 <div className="container mx-auto max-full">{
                   loading == 'succeeded' ?
-                  <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-6 place-items-center">
-                    { products.length > 0 ?  products.map((product: ProductType, index: number) => (<ProductCardHorizontal key={index} {...product} />))
-                    : <div className="text-center w-full col-span-2 font-semibold">No products to show!</div>}
-                  </div>
-                    : loading == 'failed' ? <Oops/> :
                     <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-6 place-items-center">
-                    {  Array.from(Array(6)).map((index)=><SkeletonHCard key={index} />)}
+                      {products.length > 0 ? products.map((product: ProductType, index: number) => (<ProductCardHorizontal key={index} {...product} />))
+                        : <div className="text-center w-full col-span-2 font-semibold">No products to show!</div>}
                     </div>
+                    : loading == 'failed' ? <Oops /> :
+                      <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-6 place-items-center">
+                        {Array.from(Array(6)).map((_item, index) => <SkeletonHCard key={index} />)}
+                      </div>
                 }
                 </div>
               </ScrollArea>

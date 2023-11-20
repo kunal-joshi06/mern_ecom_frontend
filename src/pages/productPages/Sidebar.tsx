@@ -25,7 +25,7 @@ export default function Sidebar({ className }: React.HTMLAttributes<HTMLDivEleme
     { value: 'gaming', pressed: false },
     { value: 'accessories', pressed: false },
     ])
-    const [minValue, setMinValue] = useState(0);
+    const [minValue, setMinValue] = useState(1);
     const [maxValue, setMaxValue] = useState(100000);
 
     const handleMinInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,11 +50,7 @@ export default function Sidebar({ className }: React.HTMLAttributes<HTMLDivEleme
 
     const debouncedValue1 = useDebounce(minValue, 800);
     const debouncedValue2 = useDebounce(maxValue, 800);
-    useEffect(() => {
 
-        dispatch(setPriceRange([minValue, maxValue]));
-
-    }, [debouncedValue1, debouncedValue2])
 
 
     const dispatch = useAppDispatch();
@@ -72,6 +68,12 @@ export default function Sidebar({ className }: React.HTMLAttributes<HTMLDivEleme
         setCategoryOptions(updatedCategories);
         dispatch(removeCategory(categoryOptions[index].value))
     }
+
+    useEffect(() => {
+
+        dispatch(setPriceRange([minValue, maxValue]));
+
+    }, [debouncedValue1, debouncedValue2, dispatch, maxValue, minValue])
 
     return (
         <div className={cn("pb-12", className)}>

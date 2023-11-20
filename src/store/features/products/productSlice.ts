@@ -42,7 +42,7 @@ export interface productState {
   minPrice: number;
   maxPrice: number;
   limit: number;
-  filterOpen:boolean;
+  filterOpen: boolean;
   loading: "idle" | "pending" | "succeeded" | "failed";
   currentProduct: ProductType;
 }
@@ -140,6 +140,13 @@ export const productSlice = createSlice({
   },
 });
 
-export const { setPage, setCategory, removeCategory,setFilterClose,setFilterOpen,setPriceRange } = productSlice.actions;
+export const {
+  setPage,
+  setCategory,
+  removeCategory,
+  setFilterClose,
+  setFilterOpen,
+  setPriceRange,
+} = productSlice.actions;
 export { getAllProductsAsync, getProductDetailsAsync };
 export default productSlice.reducer;

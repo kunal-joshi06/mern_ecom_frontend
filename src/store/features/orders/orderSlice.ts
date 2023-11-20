@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getLoggedInUserOrders, getSingleOrder } from "./orderApi";
 import { OrderType, SingleOrder } from "./orderType";
+import { logoutUserAsync } from "../auth/authSlice";
 
 const getLoggedInUserOrdersAsync = createAsyncThunk(
   "orders/getLoggedInUserOrders",
@@ -63,10 +64,13 @@ export const orderSlice = createSlice({
       })
       .addCase(getSingleOrderAsync.rejected, (state) => {
         state.loading = "failed";
+      })
+      .addCase(logoutUserAsync.fulfilled, (state) => {
+        state.orders = [];
+        state.currentOrder = {} as SingleOrder;
       });
   },
 });
 
-// export const { setPage, setCategory, removeCategory,setFilterClose,setFilterOpen,setPriceRange } = productSlice.actions;
 export { getLoggedInUserOrdersAsync, getSingleOrderAsync };
 export default orderSlice.reducer;
