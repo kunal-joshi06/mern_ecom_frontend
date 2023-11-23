@@ -42,7 +42,7 @@ const ProductDetail = () => {
     }, [dispatch, pId])
 
     return (
-        <section className="text-gray-700 body-font overflow-hidden bg-white h-screen">
+        <section className="text-gray-700 body-font overflow-hidden bg-white">
             {isLoading !== "succeeded" ? <Loader /> : <div className="container px-5 py-24 mx-auto">
                 <BreadCrumb currentPage={currentProduct?.name} />
                 <div className="lg:w-4/5 mx-auto flex flex-wrap">
